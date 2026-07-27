@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Profile - View and edit your personal details, academic contact information, and preferences.">
+    <title>StudentHub - Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Faculty</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><span aria-current="page">Profile</span></li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <main id="main-content" style="max-width: 700px; margin: 0 auto;">
+            <section class="card">
+                <h1>Student Profile Settings</h1>
+                <p>Manage your account info, contact details, and notification preferences.</p>
+
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 25px; background: #f1f5f9; padding: 15px; border-radius: 6px;">
+                    <svg width="80" height="80" viewBox="0 0 100 100" aria-label="Default avatar image" role="img">
+                        <circle cx="50" cy="50" r="48" fill="#cbd5e1" />
+                        <circle cx="50" cy="38" r="20" fill="#1e3a8a" />
+                        <path d="M 20 85 C 20 65, 80 65, 80 85 Z" fill="#1e3a8a" />
+                    </svg>
+                    <div>
+                        <h2 style="margin: 0;">Alex Johnson</h2>
+                        <p style="margin: 2px 0;"><strong>Roll No:</strong> 2026-CS-104</p>
+                        <p style="margin: 0;"><strong>Branch:</strong> B.Tech Computer Science & Engineering</p>
+                    </div>
+                </div>
+
+                <form action="dashboard.html" method="get">
+                    <h2>Personal & Contact Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="prof-fullname">Full Name</label>
+                        <input type="text" id="prof-fullname" name="fullname" value="Alex Johnson" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prof-email">Email Address</label>
+                        <input type="email" id="prof-email" name="email" value="alex.j@charusat.edu" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prof-phone">Phone Number</label>
+                        <input type="text" id="prof-phone" name="phone" value="+91 98765 43210">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prof-address">Residential Address</label>
+                        <textarea id="prof-address" name="address" rows="3">Room 204, CSPIT Hostel, CHARUSAT Campus, Changa</textarea>
+                    </div>
+
+                    <h2>Portal Preferences</h2>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="pref-email-notif" name="pref_email" checked>
+                        <label for="pref-email-notif">Receive email notifications for exam results and notices</label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="pref-event-remind" name="pref_events" checked>
+                        <label for="pref-event-remind">Receive reminders for registered campus events</label>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 25px;">
+                        <button type="submit" class="btn">Save Profile Changes</button>
+                        <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>

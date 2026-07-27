@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for a new student account on CHARUSAT StudentHub portal.">
+    <title>StudentHub - Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Faculty</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Register</span></li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <main id="main-content" style="max-width: 650px; margin: 0 auto;">
+            <section class="card">
+                <h1>Student Registration</h1>
+                <p>Fill in the form below to create your official CHARUSAT StudentHub portal account.</p>
+
+                <form action="dashboard.html" method="get">
+                    <div class="form-group">
+                        <label for="fullname">Full Name <span style="color:red">*</span></label>
+                        <input type="text" id="fullname" name="fullname" required placeholder="e.g. Rahul Sharma">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentid">Student Roll / ID Number <span style="color:red">*</span></label>
+                        <input type="text" id="studentid" name="studentid" required placeholder="e.g. 2026-CS-105">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">University Email Address <span style="color:red">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="student@charusat.edu">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Account Password <span style="color:red">*</span></label>
+                        <input type="password" id="password" name="password" required minlength="6" placeholder="At least 6 characters">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Select Department / Branch <span style="color:red">*</span></label>
+                        <select id="department" name="department" required>
+                            <option value="cs">Computer Science & Engineering (CSE)</option>
+                            <option value="it">Information Technology (IT)</option>
+                            <option value="ee">Electrical Engineering (EE)</option>
+                            <option value="me">Mechanical Engineering (ME)</option>
+                            <option value="ce">Civil Engineering (CE)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Mobile Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="+91 98765 43210">
+                    </div>
+
+                    <fieldset style="border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; margin-bottom: 18px;">
+                        <legend style="padding: 0 5px; font-weight: bold;">Gender</legend>
+                        <div class="radio-group">
+                            <input type="radio" id="gender-male" name="gender" value="male" checked>
+                            <label for="gender-male">Male</label>
+
+                            <input type="radio" id="gender-female" name="gender" value="female">
+                            <label for="gender-female">Female</label>
+
+                            <input type="radio" id="gender-other" name="gender" value="other">
+                            <label for="gender-other">Other</label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required checked>
+                        <label for="terms">I accept the university IT policy and portal terms of use. <span style="color:red">*</span></label>
+                    </div>
+
+                    <div class="form-group" style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn">Register Account</button>
+                        <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>

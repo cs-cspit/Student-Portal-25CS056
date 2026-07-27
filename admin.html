@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Portal - System metrics, student records management, and portal administration for CHARUSAT CSPIT.">
+    <title>StudentHub - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="logo">Student<span>Hub</span> | CHARUSAT Admin</div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Faculty</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html" class="active" aria-current="page">Admin</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Admin Portal</span></li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <main id="main-content">
+            <section class="card">
+                <h1>CHARUSAT CSPIT Administration Portal</h1>
+                <p>System metrics, student user management, and department control center.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 2rem; color: #1e3a8a;">CHARUSAT</h2>
+                        <p style="margin: 0;">CSPIT CSE Dept</p>
+                    </div>
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 2rem; color: #166534;">6</h2>
+                        <p style="margin: 0;">Sem-3 Enrolled Courses</p>
+                    </div>
+                    <div style="background: #fefce8; border: 1px solid #fef08a; padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 2rem; color: #854d0e;">Active</h2>
+                        <p style="margin: 0;">Timetable 2026-27 (Div 1)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Registered Students Directory</h2>
+                <form action="admin.html" method="get" class="form-inline" style="margin-bottom: 15px;">
+                    <label for="admin-search" class="skip-link" style="position: static; width: auto; height: auto;">Search Registered Students</label>
+                    <input type="text" id="admin-search" name="search" placeholder="Filter by student name or roll number..." style="max-width: 350px;">
+                    <button type="submit" class="btn">Search</button>
+                </form>
+
+                <table>
+                    <caption>Registered Students Registry</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Roll ID</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Dept</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Account Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-CS-104</td>
+                            <td>Alex Johnson</td>
+                            <td>CSE</td>
+                            <td>alex.j@charusat.edu</td>
+                            <td><span style="color: green; font-weight: bold;">Active</span></td>
+                            <td>
+                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
+                                <a href="admin.html" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;">Disable</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2026-IT-088</td>
+                            <td>Samantha Reed</td>
+                            <td>IT</td>
+                            <td>sam.reed@charusat.edu</td>
+                            <td><span style="color: green; font-weight: bold;">Active</span></td>
+                            <td>
+                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
+                                <a href="admin.html" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;">Disable</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2026-EE-045</td>
+                            <td>Michael Chang</td>
+                            <td>EE</td>
+                            <td>m.chang@charusat.edu</td>
+                            <td><span style="color: red; font-weight: bold;">Suspended</span></td>
+                            <td>
+                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
+                                <a href="admin.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem; background: green;">Enable</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Dashboard - CHARUSAT CSPIT CSE Semester 3 timetable, course progress, and academic updates.">
+    <title>StudentHub - Student Dashboard (CHARUSAT CSPIT)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Faculty</a></li>
+                <li><a href="dashboard.html" class="active" aria-current="page">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Dashboard</span></li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <div class="layout-with-sidebar">
+            <main id="main-content">
+                <section class="card">
+                    <h1>Student Portal Dashboard</h1>
+                    <p id="user-banner-name">Welcome back, <strong>Alex Johnson</strong> (Roll No: <strong>2026-CS-104</strong> | B.Tech Computer Science & Engineering - Semester 3, Division 1)</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0;">Chandubhai S. Patel Institute of Technology (CSPIT) | Academic Year: 2026-27</p>
+                </section>
+
+                <section class="card">
+                    <h2>Official Time Table - B.Tech (CSE) Sem-3 (Div-I)</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Classroom: Room 506 | Effective From: 06/07/2026</p>
+                    
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <caption>CHARUSAT CSPIT CSE Semester 3 Weekly Schedule</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Day / Time</th>
+                                    <th scope="col">09:10 - 10:10 AM</th>
+                                    <th scope="col">10:10 - 11:10 AM</th>
+                                    <th scope="col">11:10 - 12:10 PM</th>
+                                    <th scope="col">12:10 - 01:10 PM</th>
+                                    <th scope="col">01:10 - 02:10 PM</th>
+                                    <th scope="col">02:10 - 02:20 PM</th>
+                                    <th scope="col">02:20 - 03:20 PM</th>
+                                    <th scope="col">03:20 - 04:20 PM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Monday</th>
+                                    <td>CSUC201 FDSA(T)<br><small>Rm 506 (VMP)</small></td>
+                                    <td>ITUC201 FCN(T)<br><small>Rm 506 (HYY)</small></td>
+                                    <td rowspan="5" style="background: #e2e8f0; text-align: center; font-weight: bold; vertical-align: middle;">LUNCH<br>BREAK</td>
+                                    <td>HSUV201 HS(T/P)<br><small>Rm 506 (ADK)</small></td>
+                                    <td>HSUV201 HS(T/P)<br><small>Rm 506 (ADK)</small></td>
+                                    <td rowspan="5" style="background: #e2e8f0; text-align: center; font-size: 0.8rem; vertical-align: middle;">SHORT<br>BREAK</td>
+                                    <td colspan="2" style="background: #fef3c7;">
+                                        <strong>Laboratory Sessions:</strong><br>
+                                        <small>A1: CSUC201-FDSA(P) - 632 (AVK)</small><br>
+                                        <small>B1: ITUC201-FCN(P) - 638 (BPP)</small><br>
+                                        <small>C1: ITUE204-WDF(P) - 633 (ADK)</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Tuesday</th>
+                                    <td>MSUD203 MATHS(T)<br><small>Rm 506 (PM)</small></td>
+                                    <td>CSUC201 FDSA(T)<br><small>Rm 506 (ART)</small></td>
+                                    <td colspan="2" style="background: #fef3c7;">
+                                        <strong>Laboratory Sessions:</strong><br>
+                                        <small>A1: ITUC201-FCN(P) - 633 (BPP)</small><br>
+                                        <small>B1: CEUE203-OOP(P) - 632 (ADK)</small><br>
+                                        <small>C1: ITUC201-FCN(P) - 631 (HYY)</small>
+                                    </td>
+                                    <td>ITUC201 FCN(T)<br><small>Rm 506 (AN)</small></td>
+                                    <td>ITUE204 WDF(T)<br><small>Rm 506 (SRG)</small></td>
+                                </tr>
+                                <tr>
+                                    <th>Wednesday</th>
+                                    <td>MSUD203 MATHS(T)<br><small>Rm 506 (PM)</small></td>
+                                    <td>CEUE203 OOP(T)<br><small>Rm 506 (SSS)</small></td>
+                                    <td colspan="2" style="background: #fef3c7;">
+                                        <strong>Laboratory Sessions:</strong><br>
+                                        <small>A1: ITUE204-WDF(P) - 633 (DSS)</small><br>
+                                        <small>B1: ITUE204-WDF(P) - 632 (BPP)</small><br>
+                                        <small>C1: CSUC201-FDSA(P) - 634 (AVK)</small>
+                                    </td>
+                                    <td>ITUE204 WDF(T)<br><small>Rm 506 (SRG)</small></td>
+                                    <td>CSUC201 FDSA(T)<br><small>Rm 506 (VMP)</small></td>
+                                </tr>
+                                <tr>
+                                    <th>Thursday</th>
+                                    <td>ITUE204 WDF(T)<br><small>Rm 506 (VYP)</small></td>
+                                    <td>ITUC201 FCN(T)<br><small>Rm 506 (HYY)</small></td>
+                                    <td colspan="2" style="background: #fef3c7;">
+                                        <strong>Laboratory Sessions:</strong><br>
+                                        <small>A1: ITUE204-WDF(P) - 631 (VYP)</small><br>
+                                        <small>B1: CSUC201-FDSA(P) - 638 (AVK)</small><br>
+                                        <small>C1: ITUE204-WDF(P) - 632 (DSS)</small>
+                                    </td>
+                                    <td colspan="2" style="background: #fef3c7;">
+                                        <strong>Laboratory Sessions:</strong><br>
+                                        <small>A1: CEUE203-OOP(P) - 638 (ADK)</small><br>
+                                        <small>B1: ITUE204-WDF(P) - 632 (BPP)</small><br>
+                                        <small>C1: CEUE203-OOP(P) - 631 (SSS)</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Friday</th>
+                                    <td>MSUD203 MATHS(T)<br><small>Rm 506 (PM)</small></td>
+                                    <td>CSUC201 FDSA(T)<br><small>Rm 506 (ART)</small></td>
+                                    <td colspan="2" style="background: #dbeafe;">
+                                        <strong>Counselling Sessions:</strong><br>
+                                        <small>A1: CS - 631 (SRG)</small><br>
+                                        <small>B1: CS - 632 (VYP)</small><br>
+                                        <small>C1: CS - 633 (ADK)</small>
+                                    </td>
+                                    <td>ITUC201 FCN(T)<br><small>Rm 506 (HYY)</small></td>
+                                    <td>CEUE203 OOP(T)<br><small>Rm 506 (SSS)</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2>Enrolled Courses & Academic Progress (Sem 3)</h2>
+                    <table>
+                        <caption>CSE Semester 3 Registered Subjects</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Course Code</th>
+                                <th scope="col">Course Name (Short Name)</th>
+                                <th scope="col">Full Title</th>
+                                <th scope="col">Credit (T+P)</th>
+                                <th scope="col">Attendance %</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CSUC201</td>
+                                <td>FDSA</td>
+                                <td>Fundamentals of Data Structure and Algorithm</td>
+                                <td>3+1(T+P)</td>
+                                <td>92%</td>
+                                <td><span style="color: green; font-weight: bold;">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>ITUE204</td>
+                                <td>WDF</td>
+                                <td>Web Development Frameworks</td>
+                                <td>3+2(T+P)</td>
+                                <td>95%</td>
+                                <td><span style="color: green; font-weight: bold;">Excellent</span></td>
+                            </tr>
+                            <tr>
+                                <td>CEUE203</td>
+                                <td>OOP</td>
+                                <td>Object Oriented Programming</td>
+                                <td>2+1(T+P)</td>
+                                <td>88%</td>
+                                <td><span style="color: green; font-weight: bold;">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>ITUC201</td>
+                                <td>FCN</td>
+                                <td>Fundamentals of Computer Networks</td>
+                                <td>4+1(T+P)</td>
+                                <td>82%</td>
+                                <td><span style="color: green; font-weight: bold;">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>MSUD203</td>
+                                <td>MATHS</td>
+                                <td>Discrete Mathematics</td>
+                                <td>3+0(T+P)</td>
+                                <td>78%</td>
+                                <td><span style="color: orange; font-weight: bold;">Satisfactory</span></td>
+                            </tr>
+                            <tr>
+                                <td>HSUV201</td>
+                                <td>HS</td>
+                                <td>Creativity, Problem Solving and Innovation</td>
+                                <td>0+2(T+P)</td>
+                                <td>100%</td>
+                                <td><span style="color: green; font-weight: bold;">Excellent</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+
+            <aside aria-label="Dashboard Sidebar">
+                <div class="card">
+                    <h2>Student Actions</h2>
+                    <ul>
+                        <li><a href="profile.html">Edit Student Profile</a></li>
+                        <li><a href="events.html">Register for Events</a></li>
+                        <li><a href="feedback.html">Submit Faculty Feedback</a></li>
+                        <li><a href="contact.html">Request Academic Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Important Contacts</h2>
+                    <p><strong>HOD:</strong> Dr. Amit R Thakkar</p>
+                    <p><strong>Timetable Coordinators:</strong><br>Prof. Hemang A Thakar<br>Prof. Avani V Khokhariya</p>
+                    <p><strong>Principal:</strong> Dr. Trushit K Upadhyaya</p>
+                    <p><strong>Dean:</strong> Dr. Vijaykumar P Chaudhary</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>

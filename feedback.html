@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Feedback Form - Share feedback on CHARUSAT CSPIT faculty, portal experience, and lab infrastructure.">
+    <title>StudentHub - Feedback</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Faculty</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="feedback.html" class="active" aria-current="page">Feedback</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Feedback</span></li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <main id="main-content" style="max-width: 650px; margin: 0 auto;">
+            <section class="card">
+                <h1>Student Portal & Faculty Feedback</h1>
+                <p>We value your input. Please share your evaluation regarding teaching, lab facilities (Rooms 631-638), or portal experience.</p>
+
+                <form action="index.html" method="get">
+                    <div class="form-group">
+                        <label for="fb-name">Student Name (Optional)</label>
+                        <input type="text" id="fb-name" name="name" placeholder="Leave blank for anonymous submission">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fb-category">Feedback Category <span style="color:red">*</span></label>
+                        <select id="fb-category" name="category" required>
+                            <option value="">-- Select Category --</option>
+                            <option value="faculty">Faculty Teaching & Course Quality</option>
+                            <option value="labs">Computer Labs & Software (Rooms 631-638)</option>
+                            <option value="timetable">Timetable Scheduling & Infrastructure</option>
+                            <option value="portal">Student Portal UI & Features</option>
+                        </select>
+                    </div>
+
+                    <fieldset style="border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; margin-bottom: 18px;">
+                        <legend style="padding: 0 5px; font-weight: bold;">Overall Satisfaction Rating <span style="color:red">*</span></legend>
+                        <div class="radio-group" style="flex-wrap: wrap;">
+                            <input type="radio" id="rate-5" name="rating" value="5" required checked>
+                            <label for="rate-5">5 - Excellent</label>
+
+                            <input type="radio" id="rate-4" name="rating" value="4">
+                            <label for="rate-4">4 - Very Good</label>
+
+                            <input type="radio" id="rate-3" name="rating" value="3">
+                            <label for="rate-3">3 - Good</label>
+
+                            <input type="radio" id="rate-2" name="rating" value="2">
+                            <label for="rate-2">2 - Fair</label>
+
+                            <input type="radio" id="rate-1" name="rating" value="1">
+                            <label for="rate-1">1 - Poor</label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <label for="fb-comments">Detailed Comments / Suggestions <span style="color:red">*</span></label>
+                        <textarea id="fb-comments" name="comments" rows="5" required placeholder="Describe your experience or suggested improvements..."></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="fb-followup" name="followup">
+                        <label for="fb-followup">I agree to be contacted by department administration regarding this feedback.</label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn">Submit Feedback</button>
+                        <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>
