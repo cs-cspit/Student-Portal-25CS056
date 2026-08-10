@@ -10,8 +10,22 @@
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Top Notification Banner -->
+    <div id="notification-banner" class="notification-banner" data-banner-id="studenthub_faq_notice">
+        <div class="banner-content">
+            <span>📢 Need help with portal accounts or course registration? Use the search bar below or contact support.</span>
+        </div>
+        <button class="banner-dismiss" aria-label="Dismiss announcement">&times;</button>
+    </div>
+
     <header>
         <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <div class="header-actions">
+            <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="theme-icon">🌙</span><span class="theme-text">Dark</span>
+            </button>
+            <button class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false">&#9776;</button>
+        </div>
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -40,34 +54,99 @@
                 <p>Find quick answers to common questions about using the CHARUSAT CSPIT StudentHub portal, student accounts, and viewing your timetable.</p>
             </section>
 
-            <section>
-                <h2>1. Student Portal Accounts</h2>
-                <details>
-                    <summary id="forgot-password">How do I create or access my student portal account?</summary>
-                    <p>New students can fill out the <a href="register.html">Registration Form</a> with their details. Returning students can sign in using their Student ID on the <a href="login.html">Login Page</a>.</p>
-                </details>
-                <details>
-                    <summary>What should I do if I forget my account credentials?</summary>
-                    <p>Contact the IT support desk through the <a href="contact.html">Contact Form</a> or visit the CSE Department Academic Cell in person with your student ID card.</p>
-                </details>
-            </section>
+            <!-- FAQ Controls: Search and Expand/Collapse All -->
+            <div class="faq-controls card">
+                <div class="faq-search-wrapper">
+                    <label for="faq-search-input" style="display:none;">Search Questions</label>
+                    <input type="text" id="faq-search-input" placeholder="🔍 Search FAQ by keywords (e.g., credentials, timetable, lab, HOD)...">
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button id="faq-expand-all" class="btn btn-secondary" style="font-size: 0.85rem;">Expand All</button>
+                    <button id="faq-collapse-all" class="btn btn-secondary" style="font-size: 0.85rem;">Collapse All</button>
+                </div>
+            </div>
 
-            <section style="margin-top: 20px;">
-                <h2>2. Academic Timetable & Labs</h2>
-                <details>
-                    <summary>Where do B.Tech CSE Semester 3 lectures and lab sessions take place?</summary>
-                    <p>Theory lectures take place in <strong>Room 506</strong>. Laboratory sessions (FDSA, WDF, FCN, OOP) are conducted in computer labs <strong>631, 632, 633, 634, and 638</strong> as per batch allocations (A1, B1, C1).</p>
-                </details>
-                <details>
-                    <summary>Who are the Timetable Coordinators and Head of Department?</summary>
-                    <p>The HOD is <strong>Dr. Amit R Thakkar</strong>. The Timetable Coordinators are <strong>Prof. Hemang A Thakar</strong> and <strong>Prof. Avani V Khokhariya</strong>. Full faculty details are available on the <a href="about.html">About & Faculty</a> page.</p>
-                </details>
-            </section>
+            <!-- Dynamic Collapsible Accordion -->
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>1. How do I create or access my student portal account?</span>
+                        <span class="faq-icon">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>New students can fill out the <a href="register.html">Registration Form</a> with their details. Returning students can sign in using their Student ID on the <a href="login.html">Login Page</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>2. What should I do if I forget my account credentials?</span>
+                        <span class="faq-icon">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Contact the IT support desk through the <a href="contact.html">Contact Form</a> or visit the CSE Department Academic Cell in person with your student ID card.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>3. Where do B.Tech CSE Semester 3 lectures and lab sessions take place?</span>
+                        <span class="faq-icon">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Theory lectures take place in <strong>Room 506</strong>. Laboratory sessions (FDSA, WDF, FCN, OOP) are conducted in computer labs <strong>631, 632, 633, 634, and 638</strong> as per batch allocations (A1, B1, C1).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>4. Who are the Timetable Coordinators and Head of Department?</span>
+                        <span class="faq-icon">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The HOD is <strong>Dr. Amit R Thakkar</strong>. The Timetable Coordinators are <strong>Prof. Hemang A Thakar</strong> and <strong>Prof. Avani V Khokhariya</strong>. Full faculty details are available on the <a href="about.html">About & Faculty</a> page.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>5. How do I register for campus technical events and workshops?</span>
+                        <span class="faq-icon">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Navigate to the <a href="events.html">Events Page</a>, choose your preferred workshop or competition, and click the <strong>Register</strong> button to submit your registration.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="faq-no-results" class="card" style="display: none; text-align: center; margin-top: 20px;">
+                <p>No questions matching your search query were found. Have a specific question?</p>
+                <a href="contact.html" class="btn">Ask Support</a>
+            </div>
         </main>
+    </div>
+
+    <!-- Global Modal Popup Component -->
+    <div id="global-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Information</h3>
+                <button class="modal-close-btn" data-dismiss="modal" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
+

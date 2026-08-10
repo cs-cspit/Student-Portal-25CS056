@@ -12,6 +12,12 @@
 
     <header>
         <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <div class="header-actions">
+            <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="theme-icon">🌙</span><span class="theme-text">Dark</span>
+            </button>
+            <button class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false">&#9776;</button>
+        </div>
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -229,8 +235,26 @@
         </div>
     </div>
 
+    <!-- Global Modal Popup Component -->
+    <div id="global-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Dashboard Information</h3>
+                <button class="modal-close-btn" data-dismiss="modal" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>

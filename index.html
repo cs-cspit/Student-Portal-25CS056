@@ -10,8 +10,22 @@
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Top Notification Banner -->
+    <div id="notification-banner" class="notification-banner" data-banner-id="studenthub_home_notice">
+        <div class="banner-content">
+            <span>📢 <strong>Important Notice:</strong> Sem-3 Timetable is published and Cognizance 2026 Tech Fest registrations are live!</span>
+        </div>
+        <button class="banner-dismiss" aria-label="Dismiss announcement">&times;</button>
+    </div>
+
     <header>
         <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <div class="header-actions">
+            <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="theme-icon">🌙</span><span class="theme-text">Dark</span>
+            </button>
+            <button class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false">&#9776;</button>
+        </div>
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html" class="active" aria-current="page">Home</a></li>
@@ -33,6 +47,38 @@
     </nav>
 
     <div class="container">
+        <!-- Dynamic Image & Content Slider -->
+        <section class="content-slider" aria-label="Featured Highlights Slider">
+            <div class="slider-track">
+                <div class="slide active">
+                    <div class="slide-content">
+                        <h2>Welcome to B.Tech CSE Student Hub</h2>
+                        <p>Chandubhai S. Patel Institute of Technology (CSPIT) - CHARUSAT University. View academic schedules, lab allocations, and faculty notices.</p>
+                        <a href="dashboard.html" class="btn">Access Dashboard</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h2>Cognizance 2026 Tech Fest</h2>
+                        <p>Join over 500+ students in competitive coding, Web Development Frameworks (WDF), and Data Structures (FDSA) events.</p>
+                        <a href="events.html" class="btn">Explore Tech Events</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h2>Sem-3 Academic Timetable Active</h2>
+                        <p>Lectures in Room 506 and practical laboratory sessions in Rooms 631-638. Check your batch schedule online.</p>
+                        <a href="dashboard.html" class="btn btn-secondary">Check Schedule</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn slider-prev" aria-label="Previous Slide">&#10094;</button>
+                <button class="slider-btn slider-next" aria-label="Next Slide">&#10095;</button>
+            </div>
+            <div class="slider-dots"></div>
+        </section>
+
         <div class="layout-with-sidebar">
             <main id="main-content">
                 <section class="card">
@@ -53,12 +99,14 @@
                         <h3>Sem-3 Time Table Published (Odd Term 2026-27)</h3>
                         <p><strong>Date:</strong> 06/07/2026</p>
                         <p>The official timetable for B.Tech CSE Semester 3 (Division I) is active. Lectures are conducted in Room 506 and Lab sessions in Rooms 631-638. Check your dashboard for details.</p>
+                        <button class="btn btn-secondary" style="margin-top:5px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Sem-3 Time Table Notice" data-modal-content="<p><strong>Official Timetable Notice</strong></p><p>Division I Semester 3 classes are scheduled from 09:10 AM to 04:30 PM.</p><ul><li>Theory Room: Room 506</li><li>Labs: 631, 632, 633, 634, 638</li><li>Coordinators: Prof. Hemang Thakar & Prof. Avani Khokhariya</li></ul>">Quick View Notice Details</button>
                     </article>
                     <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--border-color);">
                     <article>
                         <h3>Cognizance 2026 Tech Fest Registrations Open</h3>
                         <p><strong>Date:</strong> October 08, 2026</p>
                         <p>Registration for Web Development Frameworks (WDF) workshops and Data Structures (FDSA) coding competitions is officially open under the Events section.</p>
+                        <button class="btn btn-secondary" style="margin-top:5px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Cognizance 2026 Details" data-modal-content="<p><strong>Cognizance 2026 Annual Tech Fest</strong></p><p>Participate in coding challenges, hackathons, and web dev workshops.</p><p>Registration fee: Free for CSPIT CSE students.</p><a href='events.html' class='btn' style='margin-top:10px;'>Go to Events Page</a>">Quick View Fest Details</button>
                     </article>
                 </section>
             </main>
@@ -87,8 +135,27 @@
         </div>
     </div>
 
+    <!-- Global Modal Popup Component -->
+    <div id="global-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Announcement Details</h3>
+                <button class="modal-close-btn" data-dismiss="modal" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
+

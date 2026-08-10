@@ -12,6 +12,12 @@
 
     <header>
         <div class="logo">Student<span>Hub</span> | CHARUSAT Admin</div>
+        <div class="header-actions">
+            <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="theme-icon">🌙</span><span class="theme-text">Dark</span>
+            </button>
+            <button class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false">&#9776;</button>
+        </div>
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -40,16 +46,16 @@
                 <p>System metrics, student user management, and department control center.</p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
-                    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 15px; border-radius: 4px; text-align: center;">
-                        <h2 style="margin: 0; font-size: 2rem; color: #1e3a8a;">CHARUSAT</h2>
+                    <div style="background: rgba(30, 58, 138, 0.1); border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 1.8rem; color: var(--primary-color);">CHARUSAT</h2>
                         <p style="margin: 0;">CSPIT CSE Dept</p>
                     </div>
-                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 4px; text-align: center;">
-                        <h2 style="margin: 0; font-size: 2rem; color: #166534;">6</h2>
+                    <div style="background: rgba(22, 101, 52, 0.1); border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 1.8rem; color: #166534;">6</h2>
                         <p style="margin: 0;">Sem-3 Enrolled Courses</p>
                     </div>
-                    <div style="background: #fefce8; border: 1px solid #fef08a; padding: 15px; border-radius: 4px; text-align: center;">
-                        <h2 style="margin: 0; font-size: 2rem; color: #854d0e;">Active</h2>
+                    <div style="background: rgba(133, 77, 14, 0.1); border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; text-align: center;">
+                        <h2 style="margin: 0; font-size: 1.8rem; color: #854d0e;">Active</h2>
                         <p style="margin: 0;">Timetable 2026-27 (Div 1)</p>
                     </div>
                 </div>
@@ -84,7 +90,7 @@
                             <td><span style="color: green; font-weight: bold;">Active</span></td>
                             <td>
                                 <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <a href="admin.html" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;">Disable</a>
+                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Disable Account" data-modal-content="<p>Are you sure you want to disable <strong>Alex Johnson (2026-CS-104)</strong>?</p><button class='btn' style='background:red; margin-top:10px;'>Confirm Disable</button>">Disable</button>
                             </td>
                         </tr>
                         <tr>
@@ -95,7 +101,7 @@
                             <td><span style="color: green; font-weight: bold;">Active</span></td>
                             <td>
                                 <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <a href="admin.html" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;">Disable</a>
+                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Disable Account" data-modal-content="<p>Are you sure you want to disable <strong>Samantha Reed (2026-IT-088)</strong>?</p><button class='btn' style='background:red; margin-top:10px;'>Confirm Disable</button>">Disable</button>
                             </td>
                         </tr>
                         <tr>
@@ -106,7 +112,7 @@
                             <td><span style="color: red; font-weight: bold;">Suspended</span></td>
                             <td>
                                 <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <a href="admin.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem; background: green;">Enable</a>
+                                <button class="btn" style="padding: 4px 8px; font-size: 0.85rem; background: green;" data-modal-target="#global-modal" data-modal-title="Reactivate Account" data-modal-content="<p>Reactivate account for <strong>Michael Chang (2026-EE-045)</strong>?</p><button class='btn' style='background:green; margin-top:10px;'>Reactivate</button>">Enable</button>
                             </td>
                         </tr>
                     </tbody>
@@ -115,8 +121,27 @@
         </main>
     </div>
 
+    <!-- Global Modal Popup Component -->
+    <div id="global-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Admin Management</h3>
+                <button class="modal-close-btn" data-dismiss="modal" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
+

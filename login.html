@@ -12,6 +12,12 @@
 
     <header>
         <div class="logo">Student<span>Hub</span> | CHARUSAT CSPIT</div>
+        <div class="header-actions">
+            <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span class="theme-icon">🌙</span><span class="theme-text">Dark</span>
+            </button>
+            <button class="hamburger-btn" aria-label="Toggle Navigation" aria-expanded="false">&#9776;</button>
+        </div>
         <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -39,7 +45,10 @@
                 <h1>Student Login</h1>
                 <p>Enter your credentials to access your dashboard.</p>
 
-                <form action="dashboard.html" method="get">
+                <!-- Status message for saved credentials -->
+                <div id="login-status-msg" style="display:none; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--border-color); padding: 10px 14px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem;"></div>
+
+                <form id="login-form" action="dashboard.html" method="get">
                     <div class="form-group">
                         <label for="login-id">Student ID or Email Address <span style="color:red">*</span></label>
                         <input type="text" id="login-id" name="username" required placeholder="e.g. 2026-CS-104">
@@ -67,8 +76,27 @@
         </main>
     </div>
 
+    <!-- Global Modal Popup Component -->
+    <div id="global-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Student Login Support</h3>
+                <button class="modal-close-btn" data-dismiss="modal" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Modal content loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
+
