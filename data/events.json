@@ -1,0 +1,17 @@
+[
+  {"id":1,"title":"Cognizance 2026 Annual Tech Fest","category":"tech","date":"2026-10-24","venue":"CSPIT Auditorium","description":"Compete in programming, web development, and data structure challenges."},
+  {"id":2,"title":"Accessible Web Design Workshop","category":"workshop","date":"2026-11-02","venue":"CSPIT Lab 633","description":"Practice semantic HTML, accessible forms, and responsive layouts."},
+  {"id":3,"title":"Inter-Department Sports Meet","category":"sports","date":"2026-11-15","venue":"University Sports Complex","description":"Join cricket, football, badminton, and track competitions."},
+  {"id":4,"title":"Cloud Computing Career Talk","category":"career","date":"2026-11-20","venue":"CSPIT Seminar Hall","description":"Learn about cloud engineering careers from industry speakers."},
+  {"id":5,"title":"Python Problem-Solving Sprint","category":"tech","date":"2026-11-25","venue":"CSPIT Lab 631","description":"Solve timed programming challenges with student teams."},
+  {"id":6,"title":"Robotics Build Workshop","category":"workshop","date":"2026-12-03","venue":"CSPIT Innovation Lab","description":"Build and test a small sensor-guided robot in teams."},
+  {"id":7,"title":"Campus Cultural Evening","category":"culture","date":"2026-12-08","venue":"CHARUSAT Open Air Theatre","description":"Celebrate student music, dance, and creative performances."},
+  {"id":8,"title":"Cybersecurity Awareness Seminar","category":"tech","date":"2026-12-12","venue":"CSPIT Seminar Hall","description":"Discuss safe computing, privacy, and common security threats."},
+  {"id":9,"title":"Resume and Interview Clinic","category":"career","date":"2026-12-17","venue":"CSPIT Room 506","description":"Get practical guidance on resumes and technical interviews."},
+  {"id":10,"title":"Data Visualization with JavaScript","category":"workshop","date":"2027-01-08","venue":"CSPIT Lab 634","description":"Create interactive charts from sample datasets."},
+  {"id":11,"title":"Inter-College Chess Open","category":"sports","date":"2027-01-14","venue":"CSPIT Student Activity Centre","description":"Play a friendly rapid chess tournament with local colleges."},
+  {"id":12,"title":"Open Source Contribution Day","category":"tech","date":"2027-01-21","venue":"CSPIT Lab 632","description":"Explore Git workflows and make a first contribution to a sample project."},
+  {"id":13,"title":"Design Thinking Studio","category":"workshop","date":"2027-01-29","venue":"CSPIT Design Studio","description":"Use collaborative exercises to develop and present a product idea."},
+  {"id":14,"title":"Alumni Career Networking","category":"career","date":"2027-02-05","venue":"CSPIT Auditorium","description":"Meet alumni and learn about early-career opportunities."},
+  {"id":15,"title":"Spring Campus Arts Showcase","category":"culture","date":"2027-02-12","venue":"CHARUSAT Open Air Theatre","description":"View student photography, illustration, and live performances."}
+]

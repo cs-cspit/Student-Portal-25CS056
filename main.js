@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNotificationBanner();
   initModalPopup();
   initContentSlider();
-  initCollapsibleFAQ();
-  initLoginCredentials();
   initProfileManagement();
   initRegisterValidation();
 });
@@ -16,15 +14,18 @@ function initThemeSwitcher() {
  
   if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.body.classList.add('dark-theme');
+    document.documentElement.classList.add('dark');
     updateToggleButtons(true);
   } else {
     document.body.classList.remove('dark-theme');
+    document.documentElement.classList.remove('dark');
     updateToggleButtons(false);
   }
 
   themeToggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const isDark = document.body.classList.toggle('dark-theme');
+      document.documentElement.classList.toggle('dark', isDark);
       localStorage.setItem('studenthub_theme', isDark ? 'dark' : 'light');
       updateToggleButtons(isDark);
     });
@@ -348,92 +349,6 @@ function initCollapsibleFAQ() {
   }
 }
 
-function initLoginCredentials() {
-  const loginForm = document.getElementById('login-form') || document.querySelector('form[action="dashboard.html"]');
-  const loginIdInput = document.getElementById('login-id');
-  const loginPassInput = document.getElementById('login-password');
-  const rememberCheckbox = document.getElementById('remember');
-  const statusMsg = document.getElementById('login-status-msg');
-
-  if (loginIdInput && loginPassInput) {
-    const savedUser = localStorage.getItem('studenthub_saved_user');
-    const savedPass = localStorage.getItem('studenthub_saved_pass');
-    const isRemembered = localStorage.getItem('studenthub_remember') === 'true';
-
-    if (savedUser && isRemembered) {
-      loginIdInput.value = savedUser;
-      if (savedPass) loginPassInput.value = savedPass;
-      if (rememberCheckbox) rememberCheckbox.checked = true;
-      
-      if (statusMsg) {
-        statusMsg.style.display = 'block';
-        statusMsg.innerHTML = '✔️ <em>Saved credentials restored for <strong>' + escapeHTML(savedUser) + '</strong></em> <button type="button" id="clear-saved-creds" style="background:none; border:none; color:var(--primary-color); text-decoration:underline; cursor:pointer; font-size:0.85rem; margin-left:8px;">Clear Saved Credentials</button>';
-        
-        setTimeout(() => {
-          const clearBtn = document.getElementById('clear-saved-creds');
-          if (clearBtn) {
-            clearBtn.addEventListener('click', () => {
-              localStorage.removeItem('studenthub_saved_user');
-              localStorage.removeItem('studenthub_saved_pass');
-              localStorage.removeItem('studenthub_remember');
-              loginIdInput.value = '';
-              loginPassInput.value = '';
-              if (rememberCheckbox) rememberCheckbox.checked = false;
-              statusMsg.style.display = 'none';
-            });
-          }
-        }, 0);
-      }
-    }
-
-    if (loginForm) {
-      loginForm.addEventListener('submit', () => {
-        const username = loginIdInput.value.trim();
-        const password = loginPassInput.value;
-        const shouldRemember = rememberCheckbox ? rememberCheckbox.checked : false;
-
-        if (shouldRemember && username) {
-          localStorage.setItem('studenthub_saved_user', username);
-          localStorage.setItem('studenthub_saved_pass', password);
-          localStorage.setItem('studenthub_remember', 'true');
-        } else {
-          localStorage.removeItem('studenthub_saved_user');
-          localStorage.removeItem('studenthub_saved_pass');
-          localStorage.setItem('studenthub_remember', 'false');
-        }
-
-        if (username) {
-          sessionStorage.setItem('studenthub_session_user', username);
-          localStorage.setItem('studenthub_active_user', username);
-        }
-      });
-    }
-  }
-
-  updateUserHeaderSession();
-}
-
-function updateUserHeaderSession() {
-  const activeUser = sessionStorage.getItem('studenthub_session_user') || localStorage.getItem('studenthub_active_user');
-  const navLoginBtns = document.querySelectorAll('a.nav-btn');
-
-  if (activeUser && navLoginBtns.length > 0) {
-    navLoginBtns.forEach(btn => {
-      if (btn.getAttribute('href') === 'login.html') {
-        const displayUser = activeUser.includes('@') ? activeUser.split('@')[0] : activeUser;
-        btn.textContent = `Logout (${displayUser})`;
-        btn.setAttribute('title', `Logged in as ${activeUser}. Click to Logout.`);
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          sessionStorage.removeItem('studenthub_session_user');
-          localStorage.removeItem('studenthub_active_user');
-          window.location.href = 'login.html';
-        });
-      }
-    });
-  }
-}
-
 function escapeHTML(str) {
   return str.replace(/[&<>'"]/g, 
     tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
@@ -454,28 +369,29 @@ function initRegisterValidation() {
     year: form.querySelector('#year'),
     department: form.querySelector('#department'),
     phone: form.querySelector('#phone'),
+    gender: form.querySelector('#gender-group'),
     terms: form.querySelector('#terms')
   };
 
   const rules = {
     fullname: {
-      test: value => /^[A-Za-z ]{2,50}$/.test(value.trim()),
-      message: 'Enter a valid full name using letters and spaces only.'
+      test: value => value.trim().length >= 2 && value.trim().length <= 50 && /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(value.trim()),
+      message: 'Enter a name of 2–50 letters, using single spaces between names.'
     },
     studentid: {
       test: value => /^[A-Za-z0-9- ]{3,30}$/.test(value.trim()),
-      message: 'Enter a valid roll or ID number.'
+      message: 'Enter a valid ID number.'
     },
     email: {
       test: value => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(value.trim()),
       message: 'Enter a valid email address.'
     },
     password: {
-      test: value => /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(value),
-      message: 'Password must be at least 6 characters and contain letters and numbers.'
+      test: value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])\S{8,64}$/.test(value),
+      message: 'Use 8–64 characters with uppercase and lowercase letters, a number, and a special character.'
     },
     confirmPassword: {
-      test: value => value === fields.password.value,
+      test: value => value !== '' && value === fields.password.value,
       message: 'Passwords must match.'
     },
     course: {
@@ -491,8 +407,12 @@ function initRegisterValidation() {
       message: 'Select your department.'
     },
     phone: {
-      test: value => /^(?:\+91[\s-]?)?[6-9]\d{9}$/.test(value.trim()),
-      message: 'Enter a valid 10-digit mobile number.'
+      test: value => /^(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}$/.test(value.trim()),
+      message: 'Enter a valid Indian mobile number, for example +91 98765 43210.'
+    },
+    gender: {
+      test: value => value !== '',
+      message: 'Select your gender.'
     },
     terms: {
       test: () => fields.terms.checked,
@@ -502,12 +422,15 @@ function initRegisterValidation() {
 
   function getErrorElement(element) {
     if (!element) return null;
-    const group = element.closest('.form-group') || element.closest('.checkbox-group') || element.parentElement;
+    const group = element.closest('.form-group, .checkbox-group') || element.parentElement;
     let error = group && group.querySelector('.input-error');
     if (!error && group) {
       error = document.createElement('div');
       error.className = 'input-error';
       group.appendChild(error);
+    }
+    if (error && !error.id) {
+      error.id = `register-error-${element.id || 'gender'}`;
     }
     return error;
   }
@@ -517,9 +440,13 @@ function initRegisterValidation() {
     const error = getErrorElement(element);
     if (error) error.textContent = message;
     element.classList.add('input-invalid');
-    if (element.closest('.form-group')) {
-      element.closest('.form-group').classList.add('has-error');
+    element.setAttribute('aria-invalid', 'true');
+    if (error) {
+      const descriptions = new Set((element.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+      descriptions.add(error.id);
+      element.setAttribute('aria-describedby', [...descriptions].join(' '));
     }
+    element.closest('.form-group, .checkbox-group')?.classList.add('has-error');
   }
 
   function clearError(element) {
@@ -527,16 +454,34 @@ function initRegisterValidation() {
     const error = getErrorElement(element);
     if (error) error.textContent = '';
     element.classList.remove('input-invalid');
-    if (element.closest('.form-group')) {
-      element.closest('.form-group').classList.remove('has-error');
+    element.setAttribute('aria-invalid', 'false');
+    if (error) {
+      const descriptions = (element.getAttribute('aria-describedby') || '')
+        .split(/\s+/)
+        .filter(id => id && id !== error.id);
+      if (descriptions.length) {
+        element.setAttribute('aria-describedby', descriptions.join(' '));
+      } else {
+        element.removeAttribute('aria-describedby');
+      }
     }
+    element.closest('.form-group, .checkbox-group')?.classList.remove('has-error');
+  }
+
+  function getFieldValue(fieldName) {
+    const field = fields[fieldName];
+    if (fieldName === 'gender') {
+      return form.querySelector('input[name="gender"]:checked')?.value || '';
+    }
+    if (field.type === 'checkbox') return field.checked;
+    return field.value || '';
   }
 
   function validateField(fieldName) {
     const field = fields[fieldName];
     const rule = rules[fieldName];
     if (!field || !rule) return true;
-    const value = field.type === 'checkbox' ? field.checked : field.value || '';
+    const value = getFieldValue(fieldName);
     const valid = rule.test(value);
     if (!valid) {
       setError(field, rule.message);
@@ -549,51 +494,95 @@ function initRegisterValidation() {
   function displaySummaryMessage(messages) {
     const summary = document.getElementById('register-summary');
     if (!summary) return;
+    summary.classList.remove('form-success-summary');
+    summary.replaceChildren();
     if (messages.length === 0) {
-      summary.textContent = '';
       summary.style.display = 'none';
       return;
     }
-    summary.innerHTML = `<strong>Please fix the following fields:</strong><ul>${messages.map(msg => `<li>${msg}</li>`).join('')}</ul>`;
+    const heading = document.createElement('strong');
+    heading.textContent = 'Please fix the following fields:';
+    const list = document.createElement('ul');
+    messages.forEach(message => {
+      const item = document.createElement('li');
+      item.textContent = message;
+      list.appendChild(item);
+    });
+    summary.append(heading, list);
+    summary.style.display = 'block';
+  }
+
+  function displaySuccessMessage() {
+    const summary = document.getElementById('register-summary');
+    if (!summary) return;
+    summary.replaceChildren();
+    summary.classList.add('form-success-summary');
+    summary.textContent = 'Validation successful. This demonstration does not send or save your information.';
     summary.style.display = 'block';
   }
 
   function validateForm() {
-    let valid = true;
     const messages = [];
     Object.keys(rules).forEach(name => {
-      if (!validateField(name)) {
-        valid = false;
-        messages.push(rules[name].message);
-      }
+      if (!validateField(name)) messages.push(rules[name].message);
     });
     displaySummaryMessage(messages);
-    return valid;
+    return messages.length === 0;
   }
 
   function resolveFieldName(target) {
     if (!target || !target.id) return null;
     if (target.id === 'confirm-password') return 'confirmPassword';
+    if (target.name === 'gender') return 'gender';
     return target.id;
   }
 
   form.addEventListener('submit', (event) => {
+    event.preventDefault();
     if (!validateForm()) {
-      event.preventDefault();
       const firstInvalid = form.querySelector('.input-invalid');
-      if (firstInvalid) {
-        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        firstInvalid.focus();
+      const focusTarget = firstInvalid?.id === 'gender-group'
+        ? form.querySelector('input[name="gender"]')
+        : firstInvalid;
+      if (focusTarget) {
+        focusTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        focusTarget.focus();
       }
+      return;
     }
+    displaySuccessMessage();
   });
+
+  function updatePasswordStrength() {
+    const password = fields.password.value;
+    const meter = form.querySelector('#password-strength-meter');
+    const strengthText = form.querySelector('#password-strength-text');
+    const checks = [
+      password.length >= 8,
+      password.length >= 12,
+      /[a-z]/.test(password),
+      /[A-Z]/.test(password),
+      /\d/.test(password),
+      /[^A-Za-z0-9\s]/.test(password)
+    ];
+    const score = checks.filter(Boolean).length;
+    const label = password.length === 0
+      ? 'Not entered'
+      : score >= 5 ? 'Strong' : score >= 4 ? 'Good' : score >= 3 ? 'Fair' : 'Weak';
+    if (meter) meter.value = score;
+    if (strengthText) strengthText.textContent = label;
+  }
 
   form.addEventListener('input', (event) => {
     const target = event.target;
     const fieldName = resolveFieldName(target);
     if (fieldName && fields[fieldName]) {
-      clearError(target);
+      clearError(fields[fieldName]);
       validateField(fieldName);
+    }
+    if (target === fields.password) {
+      updatePasswordStrength();
+      if (fields.confirmPassword.value) validateField('confirmPassword');
     }
   });
 
@@ -601,7 +590,7 @@ function initRegisterValidation() {
     const target = event.target;
     const fieldName = resolveFieldName(target);
     if (fieldName && fields[fieldName]) {
-      clearError(target);
+      clearError(fields[fieldName]);
       validateField(fieldName);
     }
   });
@@ -611,13 +600,18 @@ function initRegisterValidation() {
     const fieldName = resolveFieldName(target);
     if (fieldName && fields[fieldName]) {
       validateField(fieldName);
-      displaySummaryMessage(
-        Object.keys(rules)
-          .filter(name => !rules[name].test(fields[name].type === 'checkbox' ? fields[name].checked : (fields[name].value || '')))
-          .map(name => rules[name].message)
-      );
     }
   });
+
+  form.addEventListener('reset', () => {
+    window.setTimeout(() => {
+      Object.values(fields).forEach(clearError);
+      displaySummaryMessage([]);
+      updatePasswordStrength();
+    });
+  });
+
+  updatePasswordStrength();
 }
 
 function initProfileManagement() {
@@ -700,8 +694,6 @@ function initProfileManagement() {
       if (displayName) displayName.textContent = updatedProfile.fullname;
       if (displayRoll) displayRoll.textContent = updatedProfile.rollNo;
 
-      updateUserHeaderSession();
-
       if (statusMsg) {
         statusMsg.style.display = 'block';
         statusMsg.innerHTML = '✔ <strong>Profile Saved!</strong> Your details and credentials have been updated successfully.';
@@ -720,5 +712,3 @@ function initProfileManagement() {
     });
   }
 }
-
-

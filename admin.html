@@ -25,9 +25,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="admin.html" class="active" aria-current="page">Admin</a></li>
-                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="login.php" class="nav-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -63,11 +63,49 @@
 
             <section class="card">
                 <h2>Registered Students Directory</h2>
-                <form action="admin.html" method="get" class="form-inline" style="margin-bottom: 15px;">
-                    <label for="admin-search" class="skip-link" style="position: static; width: auto; height: auto;">Search Registered Students</label>
-                    <input type="text" id="admin-search" name="search" placeholder="Filter by student name or roll number..." style="max-width: 350px;">
-                    <button type="submit" class="btn">Search</button>
-                </form>
+                <p>Sample demonstration records only. Student names and email addresses are fictional.</p>
+                <div class="data-controls">
+                    <div>
+                        <label for="admin-search">Search students</label>
+                        <input type="search" id="admin-search" placeholder="Search name, roll number, or email...">
+                    </div>
+                    <div>
+                        <label for="student-department">Filter by department</label>
+                        <select id="student-department">
+                            <option value="">All departments</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="EE">EE</option>
+                            <option value="ME">ME</option>
+                            <option value="CE">CE</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="student-status-filter">Filter by status</label>
+                        <select id="student-status-filter">
+                            <option value="">All statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="student-sort">Sort by</label>
+                        <select id="student-sort">
+                            <option value="name-asc">Name (A–Z)</option>
+                            <option value="name-desc">Name (Z–A)</option>
+                            <option value="roll-asc">Roll number</option>
+                            <option value="department-asc">Department</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="student-page-size">Per page</label>
+                        <select id="student-page-size">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                </div>
 
                 <table>
                     <caption>Registered Students Registry</caption>
@@ -78,45 +116,12 @@
                             <th scope="col">Dept</th>
                             <th scope="col">Email Address</th>
                             <th scope="col">Account Status</th>
-                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>2026-CS-104</td>
-                            <td>Alex Johnson</td>
-                            <td>CSE</td>
-                            <td>alex.j@charusat.edu</td>
-                            <td><span style="color: green; font-weight: bold;">Active</span></td>
-                            <td>
-                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Disable Account" data-modal-content="<p>Are you sure you want to disable <strong>Alex Johnson (2026-CS-104)</strong>?</p><button class='btn' style='background:red; margin-top:10px;'>Confirm Disable</button>">Disable</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2026-IT-088</td>
-                            <td>Samantha Reed</td>
-                            <td>IT</td>
-                            <td>sam.reed@charusat.edu</td>
-                            <td><span style="color: green; font-weight: bold;">Active</span></td>
-                            <td>
-                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Disable Account" data-modal-content="<p>Are you sure you want to disable <strong>Samantha Reed (2026-IT-088)</strong>?</p><button class='btn' style='background:red; margin-top:10px;'>Confirm Disable</button>">Disable</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2026-EE-045</td>
-                            <td>Michael Chang</td>
-                            <td>EE</td>
-                            <td>m.chang@charusat.edu</td>
-                            <td><span style="color: red; font-weight: bold;">Suspended</span></td>
-                            <td>
-                                <a href="profile.html" class="btn" style="padding: 4px 8px; font-size: 0.85rem;">Edit</a>
-                                <button class="btn" style="padding: 4px 8px; font-size: 0.85rem; background: green;" data-modal-target="#global-modal" data-modal-title="Reactivate Account" data-modal-content="<p>Reactivate account for <strong>Michael Chang (2026-EE-045)</strong>?</p><button class='btn' style='background:green; margin-top:10px;'>Reactivate</button>">Enable</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="students-list"></tbody>
                 </table>
+                <p id="students-status" role="status" aria-live="polite">Loading students…</p>
+                <nav id="students-pagination" class="data-pagination" aria-label="Student directory pages"></nav>
             </section>
         </main>
     </div>
@@ -138,10 +143,10 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.php">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
 
     <script src="main.js"></script>
+    <script src="data-pages.js"></script>
 </body>
 </html>
-

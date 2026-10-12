@@ -33,9 +33,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html" class="active" aria-current="page">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
-                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="login.php" class="nav-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -55,73 +55,51 @@
             </section>
 
             <!-- FAQ Controls: Search and Expand/Collapse All -->
-            <div class="faq-controls card">
+            <div class="faq-controls card data-controls">
                 <div class="faq-search-wrapper">
-                    <label for="faq-search-input" style="display:none;">Search Questions</label>
-                    <input type="text" id="faq-search-input" placeholder="🔍 Search FAQ by keywords (e.g., credentials, timetable, lab, HOD)...">
+                    <label for="faq-search-input">Search questions</label>
+                    <input type="search" id="faq-search-input" placeholder="Search by question or keyword...">
                 </div>
-                <div style="display: flex; gap: 8px;">
+                <div>
+                    <label for="faq-category">Filter by topic</label>
+                    <select id="faq-category">
+                        <option value="">All topics</option>
+                        <option value="accounts">Accounts</option>
+                        <option value="academics">Academics</option>
+                        <option value="events">Events</option>
+                        <option value="support">Support</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="faq-sort">Sort by</label>
+                    <select id="faq-sort">
+                        <option value="id-asc">Original order</option>
+                        <option value="question-asc">Question (A–Z)</option>
+                        <option value="question-desc">Question (Z–A)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="faq-page-size">Per page</label>
+                    <select id="faq-page-size">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
+                <div class="faq-action-buttons" style="display: flex; gap: 8px;">
                     <button id="faq-expand-all" class="btn btn-secondary" style="font-size: 0.85rem;">Expand All</button>
                     <button id="faq-collapse-all" class="btn btn-secondary" style="font-size: 0.85rem;">Collapse All</button>
                 </div>
             </div>
 
             <!-- Dynamic Collapsible Accordion -->
-            <div class="faq-accordion">
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>1. How do I create or access my student portal account?</span>
-                        <span class="faq-icon">&#9660;</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>New students can fill out the <a href="register.html">Registration Form</a> with their details. Returning students can sign in using their Student ID on the <a href="login.html">Login Page</a>.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>2. What should I do if I forget my account credentials?</span>
-                        <span class="faq-icon">&#9660;</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Contact the IT support desk through the <a href="contact.html">Contact Form</a> or visit the CSE Department Academic Cell in person with your student ID card.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>3. Where do B.Tech CSE Semester 3 lectures and lab sessions take place?</span>
-                        <span class="faq-icon">&#9660;</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Theory lectures take place in <strong>Room 506</strong>. Laboratory sessions (FDSA, WDF, FCN, OOP) are conducted in computer labs <strong>631, 632, 633, 634, and 638</strong> as per batch allocations (A1, B1, C1).</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>4. Who are the Timetable Coordinators and Head of Department?</span>
-                        <span class="faq-icon">&#9660;</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The HOD is <strong>Dr. Amit R Thakkar</strong>. The Timetable Coordinators are <strong>Prof. Hemang A Thakar</strong> and <strong>Prof. Avani V Khokhariya</strong>. Full faculty details are available on the <a href="about.html">About & Faculty</a> page.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>5. How do I register for campus technical events and workshops?</span>
-                        <span class="faq-icon">&#9660;</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Navigate to the <a href="events.html">Events Page</a>, choose your preferred workshop or competition, and click the <strong>Register</strong> button to submit your registration.</p>
-                    </div>
-                </div>
-            </div>
+            <p id="faq-status" class="card" role="status" aria-live="polite">Loading FAQs…</p>
+            <div class="faq-accordion" id="faq-list" aria-live="polite"></div>
+            <nav id="faq-pagination" class="data-pagination" aria-label="FAQ pages"></nav>
 
             <div id="faq-no-results" class="card" style="display: none; text-align: center; margin-top: 20px;">
                 <p>No questions matching your search query were found. Have a specific question?</p>
-                <a href="contact.html" class="btn">Ask Support</a>
+                <a href="contact.php" class="btn">Ask Support</a>
             </div>
         </main>
     </div>
@@ -143,10 +121,10 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.php">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
 
     <script src="main.js"></script>
+    <script src="data-pages.js"></script>
 </body>
 </html>
-

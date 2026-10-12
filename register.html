@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Register for a new student account on CHARUSAT StudentHub portal.">
     <title>StudentHub - Register</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,9 +32,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
-                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="login.php" class="nav-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -39,45 +46,53 @@
         </ol>
     </nav>
 
-    <div class="container">
-        <main id="main-content" style="max-width: 650px; margin: 0 auto;">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-4xl">
+        <main id="main-content" class="w-full">
             <section class="card">
                 <h1>Student Registration</h1>
                 <p>Fill in the form below to create your official CHARUSAT StudentHub portal account.</p>
 
-                <form id="register-form" action="dashboard.html" method="get" novalidate>
-                    <div id="register-summary" class="form-error-summary" aria-live="assertive"></div>
-                    <div class="form-group">
+                <!-- Mobile-First Responsive Form Grid: Stacks on mobile (grid-cols-1), 2 cols on tablet/desktop (md:grid-cols-2) -->
+                <form id="register-form" novalidate class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mt-6">
+                    <div id="register-summary" class="col-span-1 md:col-span-2 form-error-summary" role="alert" aria-live="assertive"></div>
+
+                    <div class="col-span-1 form-group">
                         <label for="fullname">Full Name <span style="color:red">*</span></label>
-                        <input type="text" id="fullname" name="fullname" required placeholder="e.g. Rahul Sharma">
+                        <input type="text" id="fullname" name="fullname" required minlength="2" maxlength="50" pattern="[A-Za-z]+( [A-Za-z]+)*" autocomplete="name" placeholder="e.g. Rahul Sharma">
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 form-group">
                         <label for="studentid">Student Roll / ID Number <span style="color:red">*</span></label>
-                        <input type="text" id="studentid" name="studentid" required placeholder="e.g. 2026-CS-105">
+                        <input type="text" id="studentid" name="studentid" required minlength="3" maxlength="30" pattern="[A-Za-z0-9- ]{3,30}" autocomplete="off" placeholder="e.g. 2026-CS-105">
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 md:col-span-2 form-group">
                         <label for="email">University Email Address <span style="color:red">*</span></label>
-                        <input type="email" id="email" name="email" required placeholder="student@charusat.edu">
+                        <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" placeholder="student@charusat.edu">
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 form-group">
                         <label for="password">Account Password <span style="color:red">*</span></label>
-                        <input type="password" id="password" name="password" required minlength="6" placeholder="At least 6 characters">
+                        <input type="password" id="password" name="password" required minlength="8" maxlength="64" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{8,64}" autocomplete="new-password" aria-describedby="password-help password-strength-text" placeholder="At least 8 characters">
+                        <small id="password-help">Use 8–64 characters with uppercase, lowercase, a number, and a special character.</small>
+                        <div class="password-strength">
+                            <label for="password-strength-meter">Password strength:</label>
+                            <meter id="password-strength-meter" min="0" max="6" value="0">0 out of 6</meter>
+                            <span id="password-strength-text" aria-live="polite">Not entered</span>
+                        </div>
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 form-group">
                         <label for="confirm-password">Confirm Password <span style="color:red">*</span></label>
-                        <input type="password" id="confirm-password" name="confirm-password" required minlength="6" placeholder="Repeat password">
+                        <input type="password" id="confirm-password" name="confirm-password" required minlength="8" maxlength="64" autocomplete="new-password" placeholder="Repeat password">
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 form-group">
                         <label for="course">Course of Study <span style="color:red">*</span></label>
                         <select id="course" name="course" required>
                             <option value="">Select your course</option>
@@ -88,7 +103,7 @@
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 form-group">
                         <label for="year">Academic Year <span style="color:red">*</span></label>
                         <select id="year" name="year" required>
                             <option value="">Select year</option>
@@ -100,9 +115,10 @@
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 md:col-span-2 form-group">
                         <label for="department">Select Department / Branch <span style="color:red">*</span></label>
                         <select id="department" name="department" required>
+                            <option value="">Select your department</option>
                             <option value="cs">Computer Science & Engineering (CSE)</option>
                             <option value="it">Information Technology (IT)</option>
                             <option value="ee">Electrical Engineering (EE)</option>
@@ -112,35 +128,40 @@
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-span-1 md:col-span-2 form-group">
                         <label for="phone">Mobile Phone Number <span style="color:red">*</span></label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
+                        <input type="tel" id="phone" name="phone" required inputmode="tel" autocomplete="tel" pattern="(\+91[\s-]?)?[6-9][0-9]{4}[\s-]?[0-9]{5}" placeholder="+91 98765 43210">
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <fieldset style="border: 1px solid var(--border-color); padding: 15px; border-radius: 4px; margin-bottom: 18px;">
+                    <fieldset id="gender-group" class="col-span-1 md:col-span-2 form-group p-4 rounded-md mb-2" style="border: 1px solid var(--border-color);">
                         <legend style="padding: 0 5px; font-weight: bold;">Gender</legend>
-                        <div class="radio-group">
-                            <input type="radio" id="gender-male" name="gender" value="male" checked>
-                            <label for="gender-male">Male</label>
-
-                            <input type="radio" id="gender-female" name="gender" value="female">
-                            <label for="gender-female">Female</label>
-
-                            <input type="radio" id="gender-other" name="gender" value="other">
-                            <label for="gender-other">Other</label>
+                        <div class="radio-group flex flex-wrap gap-4 mt-2">
+                            <label class="inline-flex items-center gap-2 cursor-pointer">
+                                <input type="radio" id="gender-male" name="gender" value="male" required>
+                                <span>Male</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer">
+                                <input type="radio" id="gender-female" name="gender" value="female">
+                                <span>Female</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer">
+                                <input type="radio" id="gender-other" name="gender" value="other">
+                                <span>Other</span>
+                            </label>
                         </div>
+                        <div class="input-error" aria-live="polite"></div>
                     </fieldset>
 
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="terms" name="terms" required checked>
+                    <div class="col-span-1 md:col-span-2 form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
                         <label for="terms">I accept the university IT policy and portal terms of use. <span style="color:red">*</span></label>
                         <div class="input-error" aria-live="polite"></div>
                     </div>
 
-                    <div class="form-group" style="display: flex; gap: 10px;">
-                        <button type="submit" class="btn">Register Account</button>
-                        <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    <div class="col-span-1 md:col-span-2 flex flex-col sm:flex-row gap-3 pt-2">
+                        <button type="submit" class="btn w-full sm:w-auto text-center">Register Account</button>
+                        <button type="reset" class="btn btn-secondary w-full sm:w-auto text-center">Reset Form</button>
                     </div>
                 </form>
             </section>
@@ -164,10 +185,9 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.php">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
 
     <script src="main.js"></script>
 </body>
 </html>
-

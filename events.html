@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Campus Events - Discover and register for CHARUSAT workshops, technical festivals, and sports competitions.">
+    <meta name="description"
+        content="Campus Events - Discover and register for CHARUSAT workshops, technical festivals, and sports competitions.">
     <title>StudentHub - Campus Events</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Top Notification Banner -->
     <div id="notification-banner" class="notification-banner" data-banner-id="studenthub_events_notice">
         <div class="banner-content">
-            <span>🎉 <strong>Cognizance 2026 Registration Open!</strong> Register for coding and web dev events today.</span>
+            <span>🎉 <strong>Cognizance 2026 Registration Open!</strong> Register for coding and web dev events
+                today.</span>
         </div>
         <button class="banner-dismiss" aria-label="Dismiss announcement">&times;</button>
     </div>
@@ -33,9 +39,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="events.html" class="active" aria-current="page">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
-                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="login.php" class="nav-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -47,67 +53,56 @@
         </ol>
     </nav>
 
-    <div class="container">
-        <main id="main-content">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-7xl space-y-6">
+        <main id="main-content" class="space-y-6">
             <section class="card">
                 <h1>Campus Events & Technical Seminars</h1>
-                <p>Browse upcoming workshops, hackathons, guest lectures, and cultural events. Register directly through the portal.</p>
-                
-                <form action="events.html" method="get" class="form-inline" style="margin-top: 15px; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 200px;">
-                        <label for="event-search" style="display:none;">Search Events</label>
-                        <input type="text" id="event-search" name="search" placeholder="Search event title or keyword...">
+                <p>Browse upcoming workshops, hackathons, guest lectures, and cultural events. Register directly through
+                    the portal.</p>
+
+                <!-- Responsive Filter Form: stacks vertically on mobile, aligns horizontally on tablet/desktop -->
+                <div class="flex flex-col sm:flex-row gap-3 mt-4 items-stretch sm:items-center">
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="event-search">Search Events</label>
+                        <input type="search" id="event-search"
+                            placeholder="Search event title or keyword..." class="w-full">
                     </div>
-                    <div>
-                        <label for="event-category" style="display:none;">Filter Category</label>
-                        <select id="event-category" name="category">
+                    <div class="w-full sm:w-auto">
+                        <label for="event-category">Filter by category</label>
+                        <select id="event-category" class="w-full sm:w-auto">
                             <option value="">All Categories</option>
                             <option value="tech">Technical & Coding</option>
                             <option value="workshop">Workshops</option>
                             <option value="sports">Sports</option>
+                            <option value="career">Career</option>
+                            <option value="culture">Culture</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn">Filter</button>
-                </form>
+                    <div>
+                        <label for="event-sort">Sort by</label>
+                        <select id="event-sort" class="w-full sm:w-auto">
+                            <option value="date-asc">Date (earliest)</option>
+                            <option value="date-desc">Date (latest)</option>
+                            <option value="title-asc">Title (A–Z)</option>
+                            <option value="title-desc">Title (Z–A)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="event-page-size">Per page</label>
+                        <select id="event-page-size" class="w-full sm:w-auto">
+                            <option value="6">6</option>
+                            <option value="9">9</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                </div>
             </section>
 
-            <section>
-                <article class="card">
-                    <h2>1. Cognizance 2026: CHARUSAT Annual Tech Fest</h2>
-                    <p><strong>Category:</strong> Technical & Coding</p>
-                    <p><strong>Date & Time:</strong> October 24, 2026 | 09:00 AM - October 25, 2026 | 05:00 PM</p>
-                    <p><strong>Venue:</strong> CSPIT Auditorium & CSE Computer Labs (Rooms 631-638)</p>
-                    <p>Join over 500 developers in competitive programming, web development (WDF), and data structure challenges (FDSA). Exciting prizes to be won!</p>
-                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-                        <a href="register.html" class="btn">Register for Tech Fest</a>
-                        <button class="btn btn-secondary" data-modal-target="#global-modal" data-modal-title="Cognizance 2026 Tech Fest Rules" data-modal-content="<p><strong>Event Schedule & Guidelines</strong></p><p>Day 1: Algorithmic Coding Challenge (09:30 AM - 12:30 PM)<br>Day 2: Web Dev Hackathon & Prize Ceremony (10:00 AM - 04:00 PM)</p><p>Bring your student ID card to enter the auditorium.</p>">View Details Modal</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h2>2. Hands-on Workshop: Web Development Frameworks (WDF) & A11y</h2>
-                    <p><strong>Category:</strong> Workshop</p>
-                    <p><strong>Date & Time:</strong> November 02, 2026 | 02:00 PM - 05:00 PM</p>
-                    <p><strong>Venue:</strong> Lab 633, CSPIT CSE Dept</p>
-                    <p>Coordinated by Prof. Srushti Gajjar & Prof. Vaibhavi Patel. Learn semantic HTML5, accessible forms, and layout design.</p>
-                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-                        <a href="register.html" class="btn">Register for Workshop</a>
-                        <button class="btn btn-secondary" data-modal-target="#global-modal" data-modal-title="WDF Workshop Syllabus" data-modal-content="<p><strong>Workshop Overview</strong></p><ul><li>Semantic Markup Best Practices</li><li>Form Validation with Vanilla JS</li><li>DOM Manipulation & Event Listeners</li><li>CSS Grid & Flexbox Responsiveness</li></ul>">View Details Modal</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h2>3. CHARUSAT Inter-Departmental Sports Meet</h2>
-                    <p><strong>Category:</strong> Sports</p>
-                    <p><strong>Date & Time:</strong> November 15, 2026 - November 18, 2026</p>
-                    <p><strong>Venue:</strong> CHARUSAT University Sports Complex</p>
-                    <p>Competitions include Cricket, Football, Volleyball, Badminton, and Table Tennis. Open for all CSE, IT, and FTE students.</p>
-                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-                        <a href="register.html" class="btn">Register for Sports</a>
-                        <button class="btn btn-secondary" data-modal-target="#global-modal" data-modal-title="Sports Meet Information" data-modal-content="<p><strong>Sports Meet Categories</strong></p><p>Track events, Team sports (Cricket, Football), and Racket sports (Badminton, Table Tennis).</p><p>Ensure you bring standard sports gear and department kit.</p>">View Details Modal</button>
-                    </div>
-                </article>
+            <!-- Responsive Cards Grid: Stacks on mobile (1 col), 2 cols on tablet, 3 cols on desktop -->
+            <p id="events-status" class="card" role="status" aria-live="polite">Loading events…</p>
+            <section id="events-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-live="polite">
             </section>
+            <nav id="events-pagination" class="data-pagination" aria-label="Events pages"></nav>
         </main>
     </div>
 
@@ -128,10 +123,12 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.php">Contact
+                Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
 
     <script src="main.js"></script>
+    <script src="data-pages.js"></script>
 </body>
-</html>
 
+</html>

@@ -1,0 +1,17 @@
+[
+  {"id":1,"category":"accounts","question":"How do I create a student portal account?","answer":"Open the secure registration page, choose a unique username and email, complete all fields, and submit. The server validates the form and stores a password hash."},
+  {"id":2,"category":"accounts","question":"What should I do if I forget my password?","answer":"Contact the university IT support desk and follow its identity-verification process."},
+  {"id":3,"category":"academics","question":"Where are Semester 3 theory lectures held?","answer":"The current timetable lists Room 506 for the Semester 3 theory lectures."},
+  {"id":4,"category":"academics","question":"Where are the computer practical sessions held?","answer":"Computer practicals are scheduled in the department labs according to the batch timetable."},
+  {"id":5,"category":"events","question":"How can I find upcoming campus events?","answer":"Visit the Events page to search event titles and filter by category."},
+  {"id":6,"category":"events","question":"Can I register for a workshop from this portal?","answer":"Open the event details and follow the registration instructions listed by the event organizer."},
+  {"id":7,"category":"support","question":"How can I contact student support?","answer":"Use the Contact page to find the department support contact options."},
+  {"id":8,"category":"academics","question":"Where can I find the faculty directory?","answer":"Open About & Faculty from the main navigation to view the department directory."},
+  {"id":9,"category":"accounts","question":"Which email address should I use to register?","answer":"Use the email address provided by your institution or an address that you can access."},
+  {"id":10,"category":"support","question":"How do I report incorrect timetable information?","answer":"Contact the department timetable coordinator and provide the course, batch, and affected schedule."},
+  {"id":11,"category":"academics","question":"How do I check my class schedule?","answer":"Open the Dashboard and review the timetable section for your current semester."},
+  {"id":12,"category":"events","question":"Are campus events open to every department?","answer":"Eligibility varies by event. Check the event description or contact its organizer."},
+  {"id":13,"category":"support","question":"Where can I read answers to common portal questions?","answer":"Use this FAQ page and enter a keyword in the search box."},
+  {"id":14,"category":"accounts","question":"Why does the registration form show validation errors?","answer":"Review each message near its field, correct the value, and submit the form again."},
+  {"id":15,"category":"support","question":"How do I update my student profile?","answer":"Sign in to the portal, open your profile, and update the available profile fields."}
+]

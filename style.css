@@ -217,6 +217,30 @@ p {
   font-size: 0.95rem;
 }
 
+.form-message {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.form-success-summary {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.password-strength {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.password-strength meter {
+  width: 120px;
+  max-width: 100%;
+}
+
 .input-error {
   color: #dc2626;
   font-size: 0.92rem;
@@ -696,6 +720,56 @@ body.dark-theme .form-group textarea {
   font-size: 0.95rem;
 }
 
+.data-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.data-controls > div {
+  flex: 1 1 180px;
+}
+
+.data-controls label,
+main > section > div label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.data-controls input,
+.data-controls select,
+main > section > div select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.data-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.data-pagination button[aria-current="page"] {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.data-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .faq-accordion {
   display: flex;
   flex-direction: column;
@@ -758,4 +832,3 @@ body.dark-theme .form-group textarea {
   max-height: 500px;
   padding: 0 20px 16px 20px;
 }
-

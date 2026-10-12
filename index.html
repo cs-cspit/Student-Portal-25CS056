@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Student Hub Portal - Central platform for CHARUSAT CSPIT CSE students.">
     <title>StudentHub - Home (CHARUSAT CSPIT)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,9 +40,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
-                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="login.php" class="nav-btn">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -46,7 +53,7 @@
         </ol>
     </nav>
 
-    <div class="container">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-7xl">
         <!-- Dynamic Image & Content Slider -->
         <section class="content-slider" aria-label="Featured Highlights Slider">
             <div class="slider-track">
@@ -79,39 +86,48 @@
             <div class="slider-dots"></div>
         </section>
 
-        <div class="layout-with-sidebar">
-            <main id="main-content">
+        <!-- Responsive Mobile-First Grid Layout: Stacks on mobile (grid-cols-1), 2/3 and 1/3 on desktop (lg:grid-cols-3) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <main id="main-content" class="lg:col-span-2 space-y-6">
                 <section class="card">
                     <h1>Welcome to StudentHub Portal</h1>
                     <h2>Chandubhai S. Patel Institute of Technology (CSPIT)</h2>
                     <p style="font-weight: bold; color: var(--primary-color);">Department of Computer Science & Engineering (B.Tech CSE)</p>
                     <p>Your official student platform for viewing Semester 3 class timetables, faculty directory, academic attendance, technical events, and departmental announcements.</p>
-                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                        <a href="register.html" class="btn">New Student Registration</a>
-                        <a href="login.html" class="btn btn-secondary">Student Login</a>
-                        <a href="dashboard.html" class="btn" style="background-color: #166534;">View Time Table</a>
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-3 mt-4">
+                        <a href="register_account.php" class="btn text-center">New Student Registration</a>
+                        <a href="login.php" class="btn btn-secondary text-center">Student Login</a>
+                        <a href="dashboard.html" class="btn text-center" style="background-color: #166534;">View Time Table</a>
                     </div>
                 </section>
 
                 <section class="card">
                     <h2>Department Notices & News</h2>
-                    <article>
-                        <h3>Sem-3 Time Table Published (Odd Term 2026-27)</h3>
-                        <p><strong>Date:</strong> 06/07/2026</p>
-                        <p>The official timetable for B.Tech CSE Semester 3 (Division I) is active. Lectures are conducted in Room 506 and Lab sessions in Rooms 631-638. Check your dashboard for details.</p>
-                        <button class="btn btn-secondary" style="margin-top:5px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Sem-3 Time Table Notice" data-modal-content="<p><strong>Official Timetable Notice</strong></p><p>Division I Semester 3 classes are scheduled from 09:10 AM to 04:30 PM.</p><ul><li>Theory Room: Room 506</li><li>Labs: 631, 632, 633, 634, 638</li><li>Coordinators: Prof. Hemang Thakar & Prof. Avani Khokhariya</li></ul>">Quick View Notice Details</button>
-                    </article>
-                    <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--border-color);">
-                    <article>
-                        <h3>Cognizance 2026 Tech Fest Registrations Open</h3>
-                        <p><strong>Date:</strong> October 08, 2026</p>
-                        <p>Registration for Web Development Frameworks (WDF) workshops and Data Structures (FDSA) coding competitions is officially open under the Events section.</p>
-                        <button class="btn btn-secondary" style="margin-top:5px; font-size: 0.85rem;" data-modal-target="#global-modal" data-modal-title="Cognizance 2026 Details" data-modal-content="<p><strong>Cognizance 2026 Annual Tech Fest</strong></p><p>Participate in coding challenges, hackathons, and web dev workshops.</p><p>Registration fee: Free for CSPIT CSE students.</p><a href='events.html' class='btn' style='margin-top:10px;'>Go to Events Page</a>">Quick View Fest Details</button>
-                    </article>
+                    <!-- Responsive Cards Grid for Announcements: stacks 1-col on mobile, 2-col on tablet/desktop -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <article class="p-4 rounded-lg flex flex-col justify-between shadow-sm" style="background-color: var(--bg-color); border: 1px solid var(--border-color);">
+                            <div>
+                                <h3 class="text-base font-bold">Sem-3 Time Table Published (Odd Term 2026-27)</h3>
+                                <p class="text-sm mt-1"><strong>Date:</strong> 06/07/2026</p>
+                                <p class="text-sm mt-2">The official timetable for B.Tech CSE Semester 3 (Division I) is active. Lectures are conducted in Room 506 and Lab sessions in Rooms 631-638. Check your dashboard for details.</p>
+                            </div>
+                            <button class="btn btn-secondary mt-3 text-sm w-full sm:w-auto" data-modal-target="#global-modal" data-modal-title="Sem-3 Time Table Notice" data-modal-content="<p><strong>Official Timetable Notice</strong></p><p>Division I Semester 3 classes are scheduled from 09:10 AM to 04:30 PM.</p><ul><li>Theory Room: Room 506</li><li>Labs: 631, 632, 633, 634, 638</li><li>Coordinators: Prof. Hemang Thakar & Prof. Avani Khokhariya</li></ul>">Quick View Notice Details</button>
+                        </article>
+
+                        <article class="p-4 rounded-lg flex flex-col justify-between shadow-sm" style="background-color: var(--bg-color); border: 1px solid var(--border-color);">
+                            <div>
+                                <h3 class="text-base font-bold">Cognizance 2026 Tech Fest Registrations Open</h3>
+                                <p class="text-sm mt-1"><strong>Date:</strong> October 08, 2026</p>
+                                <p class="text-sm mt-2">Registration for Web Development Frameworks (WDF) workshops and Data Structures (FDSA) coding competitions is officially open under the Events section.</p>
+                            </div>
+                            <button class="btn btn-secondary mt-3 text-sm w-full sm:w-auto" data-modal-target="#global-modal" data-modal-title="Cognizance 2026 Details" data-modal-content="<p><strong>Cognizance 2026 Annual Tech Fest</strong></p><p>Participate in coding challenges, hackathons, and web dev workshops.</p><p>Registration fee: Free for CSPIT CSE students.</p><a href='events.html' class='btn' style='margin-top:10px;'>Go to Events Page</a>">Quick View Fest Details</button>
+                        </article>
+                    </div>
                 </section>
             </main>
 
-            <aside aria-label="Sidebar Announcements">
+            <!-- Responsive Sidebar: Stacks on mobile, sits next to main on desktop -->
+            <aside aria-label="Sidebar Announcements" class="lg:col-span-1 space-y-6">
                 <div class="card">
                     <h2>Quick Links</h2>
                     <ul>
@@ -152,10 +168,9 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 StudentHub - CHARUSAT CSPIT CSE. Academic Practical Submission | <a href="contact.php">Contact Us</a> | <a href="faq.html">FAQ</a></p>
     </footer>
 
     <script src="main.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,17 @@
+[
+  {"roll":"2026-CS-104","name":"Aarav Patel","department":"CSE","email":"aarav.patel@example.test","status":"Active"},
+  {"roll":"2026-IT-088","name":"Krisha Shah","department":"IT","email":"krisha.shah@example.test","status":"Active"},
+  {"roll":"2026-EE-045","name":"Kabir Mehta","department":"EE","email":"kabir.mehta@example.test","status":"Suspended"},
+  {"roll":"2026-ME-071","name":"Mira Desai","department":"ME","email":"mira.desai@example.test","status":"Active"},
+  {"roll":"2026-CE-032","name":"Ishaan Joshi","department":"CE","email":"ishaan.joshi@example.test","status":"Active"},
+  {"roll":"2026-CS-116","name":"Anaya Trivedi","department":"CSE","email":"anaya.trivedi@example.test","status":"Active"},
+  {"roll":"2026-IT-093","name":"Reyansh Shah","department":"IT","email":"reyansh.shah@example.test","status":"Suspended"},
+  {"roll":"2026-EE-052","name":"Sarah Patel","department":"EE","email":"sara.patel@example.test","status":"Active"},
+  {"roll":"2026-ME-079","name":"Vivaan Bhatt","department":"ME","email":"vivaan.bhatt@example.test","status":"Active"},
+  {"roll":"2026-CE-041","name":"Aadhya Mehta","department":"CE","email":"aadhya.mehta@example.test","status":"Active"},
+  {"roll":"2026-CS-127","name":"Arjun Desai","department":"CSE","email":"arjun.desai@example.test","status":"Suspended"},
+  {"roll":"2026-IT-105","name":"Myra Joshi","department":"IT","email":"myra.joshi@example.test","status":"Active"},
+  {"roll":"2026-EE-063","name":"Dev Shah","department":"EE","email":"dev.shah@example.test","status":"Active"},
+  {"roll":"2026-ME-084","name":"Kiara Patel","department":"ME","email":"kiara.patel@example.test","status":"Suspended"},
+  {"roll":"2026-CE-057","name":"Rohan Trivedi","department":"CE","email":"rohan.trivedi@example.test","status":"Active"}
+]
