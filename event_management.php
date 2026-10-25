@@ -173,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $deleted = $delete->affected_rows === 1;
                         $delete->close();
                         if ($deleted) {
+                            recordAuditAction($connection, 'event.delete', "Managed event ID {$eventId} was deleted.");
                             removeEventPoster(is_string($posterToRemove) ? $posterToRemove : null);
                             $_SESSION['event_management_message'] = 'Event deleted successfully.';
                             $_SESSION['event_management_message_type'] = 'success';
@@ -287,6 +288,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                             $statement->execute();
                             $statement->close();
+                            recordAuditAction($connection, 'event.update', "Managed event ID {$eventId} was updated.");
                             if ($newPoster !== null) {
                                 removeEventPoster($oldPoster);
                             }
@@ -306,7 +308,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $newPoster
                             );
                             $statement->execute();
+                            $eventId = $connection->insert_id;
                             $statement->close();
+                            recordAuditAction($connection, 'event.create', "Managed event ID {$eventId} was created.");
                             $_SESSION['event_management_message'] = 'Event created successfully.';
                         }
 

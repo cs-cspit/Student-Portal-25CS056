@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $statement->bind_param('i', $studentId);
                     $statement->execute();
                     if ($statement->affected_rows === 1) {
+                        recordAuditAction($connection, 'student.soft_delete', "Managed student ID {$studentId} was marked inactive.");
                         $_SESSION['student_management_message'] = 'Student marked inactive successfully. The record has not been permanently deleted.';
                         $_SESSION['student_management_message_type'] = 'success';
                     } else {
@@ -133,6 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 );
                                 $statement->execute();
                                 $statement->close();
+                                recordAuditAction($connection, 'student.update', "Managed student ID {$studentId} was updated.");
                                 $_SESSION['student_management_message'] = 'Student details updated successfully.';
                             }
                         } else {
@@ -148,7 +150,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $formValues['course']
                             );
                             $statement->execute();
+                            $studentId = $connection->insert_id;
                             $statement->close();
+                            recordAuditAction($connection, 'student.create', "Managed student ID {$studentId} was created.");
                             $_SESSION['student_management_message'] = 'Student added successfully.';
                         }
 

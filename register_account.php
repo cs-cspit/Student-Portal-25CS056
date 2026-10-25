@@ -20,10 +20,11 @@ if (!isset($_SESSION['registration_csrf_token'])) {
 }
 
 $csrfToken = $_SESSION['registration_csrf_token'];
-$values = ['full_name' => '', 'username' => '', 'email' => ''];
+$values = ['full_name' => '', 'student_id' => '', 'email' => ''];
 $errors = [];
 $formError = '';
 $successMessage = '';
+$transactionStarted = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($values as $field => $unused) {
@@ -47,10 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['full_name'] = 'Enter a valid name (up to 100 characters).';
     }
 
-    if ($values['username'] === '') {
-        $errors['username'] = 'Username is required.';
-    } elseif (preg_match('/^[A-Za-z0-9_.-]{3,30}$/', $values['username']) !== 1) {
-        $errors['username'] = 'Username must be 3–30 characters using letters, numbers, dots, underscores, or hyphens.';
+    if ($values['student_id'] === '') {
+        $errors['student_id'] = 'Student ID is required.';
+    } elseif (strlen($values['student_id']) > 30
+        || preg_match('/^[A-Za-z0-9][A-Za-z0-9_.\/-]*$/', $values['student_id']) !== 1) {
+        $errors['student_id'] = 'Enter a valid Student ID using letters, numbers, dots, underscores, slashes, or hyphens (up to 30 characters).';
     }
 
     if ($values['email'] === '') {
@@ -74,66 +76,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($formError === '' && $errors === []) {
         try {
-            $pdo = createDatabaseConnection();
-            $duplicateQuery = $pdo->prepare(
-                'SELECT username, email
+            // Use the MySQLi helper here (not the PDO helper) and bind all user values.
+            $connection = createMysqliConnection();
+            $duplicateQuery = $connection->prepare(
+                'SELECT student_id, username, email
                  FROM user_accounts
-                 WHERE username = :username OR email = :email
-                 LIMIT 1'
+                 WHERE student_id = ? OR username = ? OR email = ?'
             );
-            $duplicateQuery->execute([
-                'username' => $values['username'],
-                'email' => $values['email'],
-            ]);
-            $duplicate = $duplicateQuery->fetch();
+            $duplicateQuery->bind_param('sss', $values['student_id'], $values['student_id'], $values['email']);
+            $duplicateQuery->execute();
+            $duplicateQuery->bind_result($existingStudentId, $existingUsername, $existingEmail);
+            $studentIdExists = false;
+            $emailExists = false;
+            while ($duplicateQuery->fetch()) {
+                if ((is_string($existingStudentId) && strcasecmp($existingStudentId, $values['student_id']) === 0)
+                    || strcasecmp($existingUsername, $values['student_id']) === 0) {
+                    $studentIdExists = true;
+                }
+                if (strcasecmp($existingEmail, $values['email']) === 0) {
+                    $emailExists = true;
+                }
+            }
+            $duplicateQuery->close();
 
-            if ($duplicate !== false) {
-                if (strcasecmp($duplicate['username'], $values['username']) === 0) {
-                    $errors['username'] = 'That username is already registered.';
-                }
-                if (strcasecmp($duplicate['email'], $values['email']) === 0) {
-                    $errors['email'] = 'That email address is already registered.';
-                }
-            } else {
+            if ($studentIdExists) {
+                $errors['student_id'] = 'That Student ID is already registered.';
+            }
+            if ($emailExists) {
+                $errors['email'] = 'That email address is already registered.';
+            }
+
+            if (!$studentIdExists && !$emailExists) {
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                $pdo->beginTransaction();
-                $insertQuery = $pdo->prepare(
-                    'INSERT INTO user_accounts (full_name, username, email, password_hash)
-                     VALUES (:full_name, :username, :email, :password_hash)'
+                if ($passwordHash === false) {
+                    throw new RuntimeException('Password hashing failed.');
+                }
+
+                $connection->begin_transaction();
+                $transactionStarted = true;
+                // This prepared INSERT stores only the password hash, never the raw password.
+                $insertQuery = $connection->prepare(
+                    'INSERT INTO user_accounts (full_name, username, student_id, email, password_hash)
+                     VALUES (?, ?, ?, ?, ?)'
                 );
-                $insertQuery->execute([
-                    'full_name' => $values['full_name'],
-                    'username' => $values['username'],
-                    'email' => $values['email'],
-                    'password_hash' => $passwordHash,
-                ]);
-                $roleQuery = $pdo->prepare(
-                    'INSERT INTO auth_user_roles (user_id, role) VALUES (:user_id, :role)'
+                $insertQuery->bind_param(
+                    'sssss',
+                    $values['full_name'],
+                    $values['student_id'],
+                    $values['student_id'],
+                    $values['email'],
+                    $passwordHash
                 );
-                $roleQuery->execute([
-                    'user_id' => $pdo->lastInsertId(),
-                    'role' => 'Student',
-                ]);
-                $pdo->commit();
+                $insertQuery->execute();
+                $insertQuery->close();
+
+                $userId = $connection->insert_id;
+                $role = 'Student';
+                $roleQuery = $connection->prepare(
+                    'INSERT INTO auth_user_roles (user_id, role) VALUES (?, ?)'
+                );
+                $roleQuery->bind_param('is', $userId, $role);
+                $roleQuery->execute();
+                $roleQuery->close();
+                $connection->commit();
+                $transactionStarted = false;
 
                 $successMessage = 'Registration successful. Your account was saved securely.';
-                $values = ['full_name' => '', 'username' => '', 'email' => ''];
+                $values = ['full_name' => '', 'student_id' => '', 'email' => ''];
                 $_SESSION['registration_csrf_token'] = bin2hex(random_bytes(32));
                 $csrfToken = $_SESSION['registration_csrf_token'];
             }
-        } catch (PDOException $exception) {
-            if (isset($pdo) && $pdo->inTransaction()) {
-                $pdo->rollBack();
+        } catch (mysqli_sql_exception $exception) {
+            if (isset($connection) && $transactionStarted) {
+                $connection->rollback();
+                $transactionStarted = false;
             }
-            if ($exception->getCode() === '23000') {
-                $formError = 'That username or email address is already registered. Please choose another.';
+            if ($exception->getCode() === 1062) {
+                $formError = 'That Student ID or email address is already registered. Please choose another.';
             } else {
                 error_log('StudentHub account registration failed: ' . $exception->getMessage());
                 $formError = 'We could not save your registration. Check the database setup and try again.';
             }
         } catch (RuntimeException $exception) {
+            if (isset($connection) && $transactionStarted) {
+                $connection->rollback();
+                $transactionStarted = false;
+            }
             error_log('StudentHub account registration database configuration failed: ' . $exception->getMessage());
             $formError = 'The database is not available. Check the database connection settings and try again.';
+        } finally {
+            if (isset($connection) && $connection instanceof mysqli) {
+                $connection->close();
+            }
         }
     }
 }
@@ -164,7 +198,7 @@ $hasErrors = $formError !== '' || $errors !== [];
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About & Faculty</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="student_dashboard.php">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.php">Contact</a></li>
@@ -185,7 +219,7 @@ $hasErrors = $formError !== '' || $errors !== [];
         <main id="main-content">
             <section class="card">
                 <h1>Create a StudentHub Account</h1>
-                <p>Register with a unique username and email address. Your password is hashed before it is stored.</p>
+                <p>Register with a unique Student ID and email address. Your password is hashed before it is stored.</p>
 
                 <?php if ($successMessage !== ''): ?>
                     <div class="form-message form-success-summary" role="status"><?= escapeRegistrationOutput($successMessage) ?></div>
@@ -211,9 +245,9 @@ $hasErrors = $formError !== '' || $errors !== [];
                     </div>
 
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.-]{3,30}" autocomplete="username" value="<?= escapeRegistrationOutput($values['username']) ?>" aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>" <?= isset($errors['username']) ? 'aria-describedby="error-username"' : '' ?>>
-                        <?php if (isset($errors['username'])): ?><div class="input-error" id="error-username"><?= escapeRegistrationOutput($errors['username']) ?></div><?php endif; ?>
+                        <label for="student-id">Student ID</label>
+                        <input type="text" id="student-id" name="student_id" required maxlength="30" pattern="[A-Za-z0-9][A-Za-z0-9_./-]{0,29}" autocomplete="off" value="<?= escapeRegistrationOutput($values['student_id']) ?>" aria-invalid="<?= isset($errors['student_id']) ? 'true' : 'false' ?>" <?= isset($errors['student_id']) ? 'aria-describedby="error-student-id"' : '' ?>>
+                        <?php if (isset($errors['student_id'])): ?><div class="input-error" id="error-student-id"><?= escapeRegistrationOutput($errors['student_id']) ?></div><?php endif; ?>
                     </div>
 
                     <div class="form-group">

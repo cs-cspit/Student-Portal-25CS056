@@ -62,6 +62,25 @@ function destroyCurrentSession(): void
     session_destroy();
 }
 
+function recordAuditAction(mysqli $connection, string $action, string $details): void
+{
+    $userId = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+    if ($userId === false || ($_SESSION['role'] ?? null) !== 'Admin') {
+        throw new RuntimeException('An authenticated admin session is required to record this audit action.');
+    }
+
+    $ipAddress = is_string($_SERVER['REMOTE_ADDR'] ?? null) ? $_SERVER['REMOTE_ADDR'] : '';
+    $userAgent = is_string($_SERVER['HTTP_USER_AGENT'] ?? null) ? substr($_SERVER['HTTP_USER_AGENT'], 0, 255) : '';
+    $statement = $connection->prepare(
+        'INSERT INTO audit_logs (admin_user_id, action, details, ip_address, user_agent)
+         VALUES (?, ?, ?, ?, ?)'
+    );
+    $adminUserId = (int) $userId;
+    $statement->bind_param('issss', $adminUserId, $action, $details, $ipAddress, $userAgent);
+    $statement->execute();
+    $statement->close();
+}
+
 function requireAuthenticatedUser(?string $requiredRole = null): array
 {
     startSecureSession();

@@ -24,10 +24,11 @@ if (!is_string($expectedToken) || !is_string($submittedToken) || !hash_equals($e
 
 try {
     $connection = createMysqliConnection();
+    // Match the account's actual primary key (`id`) to the role's foreign key (`user_id`).
     $query = $connection->prepare(
-        'SELECT u.user_id, u.full_name, u.email, u.password_hash, r.role
+        'SELECT u.id, u.full_name, u.email, u.password_hash, r.role
          FROM user_accounts AS u
-         INNER JOIN auth_user_roles AS r ON r.user_id = u.user_id
+         INNER JOIN auth_user_roles AS r ON r.user_id = u.id
          WHERE u.email = ?
          LIMIT 1'
     );
@@ -37,9 +38,11 @@ try {
     $query->bind_result($userId, $fullName, $accountEmail, $passwordHash, $role);
     $userFound = $query->fetch();
     $query->close();
+    $query = null;
     $connection->close();
+    $connection = null;
 
-    if (!$userFound || !password_verify($password, $passwordHash)) {
+    if ($userFound !== true || !password_verify($password, (string) $passwordHash)) {
         $_SESSION['login_error'] = 'Invalid email or password.';
         redirectTo('login.php');
     }
@@ -70,4 +73,11 @@ try {
     error_log('StudentHub login database configuration failed: ' . $exception->getMessage());
     $_SESSION['login_error'] = 'Login is temporarily unavailable. Check the database connection and try again.';
     redirectTo('login.php');
+} finally {
+    if (isset($query) && $query instanceof mysqli_stmt) {
+        $query->close();
+    }
+    if (isset($connection) && $connection instanceof mysqli) {
+        $connection->close();
+    }
 }

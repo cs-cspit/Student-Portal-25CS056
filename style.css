@@ -299,6 +299,61 @@ p {
   background-color: #475569;
 }
 
+.btn-danger {
+  background-color: #b91c1c;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #991b1b;
+}
+
+.practical-api-card {
+  margin-top: 2rem;
+}
+
+.practical-api-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.7fr);
+  gap: 2rem;
+  margin-top: 1.25rem;
+}
+
+.practical-api-form,
+.practical-api-list {
+  min-width: 0;
+}
+
+.practical-api-form h3,
+.practical-api-list h3 {
+  margin-bottom: 0.75rem;
+}
+
+.practical-api-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.practical-api-actions .btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.api-status-error {
+  color: #b91c1c;
+}
+
+.api-status-success {
+  color: #166534;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -446,6 +501,10 @@ body.dark-theme .form-group textarea {
 }
 
 @media (max-width: 768px) {
+  .practical-api-layout {
+    grid-template-columns: 1fr;
+  }
+
   .hamburger-btn {
     display: block;
   }

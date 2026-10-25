@@ -37,7 +37,7 @@
             <ul>
                 <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="about.html">About & Faculty</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="student_dashboard.php">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.php">Contact</a></li>
@@ -61,8 +61,9 @@
                     <div class="slide-content">
                         <h2>Welcome to B.Tech CSE Student Hub</h2>
                         <p>Chandubhai S. Patel Institute of Technology (CSPIT) - CHARUSAT University. View academic schedules, lab allocations, and faculty notices.</p>
-                        <a href="dashboard.html" class="btn">Access Dashboard</a>
+                        <a href="student_dashboard.php" class="btn">Access Dashboard</a>
                     </div>
+
                 </div>
                 <div class="slide">
                     <div class="slide-content">
@@ -70,12 +71,13 @@
                         <p>Join over 500+ students in competitive coding, Web Development Frameworks (WDF), and Data Structures (FDSA) events.</p>
                         <a href="events.html" class="btn">Explore Tech Events</a>
                     </div>
+
                 </div>
                 <div class="slide">
                     <div class="slide-content">
                         <h2>Sem-3 Academic Timetable Active</h2>
                         <p>Lectures in Room 506 and practical laboratory sessions in Rooms 631-638. Check your batch schedule online.</p>
-                        <a href="dashboard.html" class="btn btn-secondary">Check Schedule</a>
+                        <a href="student_dashboard.php" class="btn btn-secondary">Check Schedule</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +99,7 @@
                     <div class="flex flex-col sm:flex-row flex-wrap gap-3 mt-4">
                         <a href="register_account.php" class="btn text-center">New Student Registration</a>
                         <a href="login.php" class="btn btn-secondary text-center">Student Login</a>
-                        <a href="dashboard.html" class="btn text-center" style="background-color: #166534;">View Time Table</a>
+                        <a href="student_dashboard.php" class="btn text-center" style="background-color: #166534;">View Time Table</a>
                     </div>
                 </section>
 
@@ -131,12 +133,12 @@
                 <div class="card">
                     <h2>Quick Links</h2>
                     <ul>
-                        <li><a href="dashboard.html">Class Time Table (Sem 3)</a></li>
+                        <li><a href="student_dashboard.php">Class Time Table (Sem 3)</a></li>
                         <li><a href="about.html">Faculty Directory</a></li>
                         <li><a href="events.html">Campus Events Calendar</a></li>
                         <li><a href="profile.html">Update Profile</a></li>
                         <li><a href="faq.html">Help & FAQ</a></li>
-                        <li><a href="admin.html">Admin Portal</a></li>
+                        <li><a href="admin_dashboard.php">Admin Portal</a></li>
                     </ul>
                 </div>
 
@@ -149,6 +151,55 @@
                 </div>
             </aside>
         </div>
+
+        <section id="practical-13" class="card practical-api-card" aria-labelledby="practical-13-title">
+            <h2 id="practical-13-title">Practical 13: Student Records API</h2>
+            <p>Manage student records through the PHP JSON API using Fetch.</p>
+
+            <div class="practical-api-layout">
+                <form id="student-form" class="practical-api-form">
+                    <h3 id="student-form-title">Add a student</h3>
+                    <input type="hidden" id="student-id">
+
+                    <div class="form-group">
+                        <label for="student-name">Full name</label>
+                        <input type="text" id="student-name" name="full_name" required minlength="2" maxlength="100" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-email">Email</label>
+                        <input type="email" id="student-email" name="email" required maxlength="254" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-course">Course</label>
+                        <input type="text" id="student-course" name="course" required minlength="2" maxlength="80">
+                    </div>
+
+                    <div class="practical-api-actions">
+                        <button type="submit" class="btn" id="student-submit">Add student</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit" hidden>Cancel edit</button>
+                    </div>
+                </form>
+
+                <div class="practical-api-list">
+                    <h3>Student list</h3>
+                    <p id="student-status" role="status" aria-live="polite">Loading student records…</p>
+                    <div class="table-scroll">
+                        <table>
+                            <caption>Students managed by the Practical 13 JSON API</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Course</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Global Modal Popup Component -->
@@ -172,5 +223,6 @@
     </footer>
 
     <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

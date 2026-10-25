@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About & Faculty</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="student_dashboard.php">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.php" class="active" aria-current="page">Contact</a></li>

@@ -138,3 +138,46 @@ VALUES
 SELECT * FROM students;
 SELECT * FROM events;
 SELECT * FROM registrations;
+
+-- ==========================================
+-- 8. PRACTICAL 13 FETCH API STUDENT RECORDS
+-- ==========================================
+
+CREATE TABLE IF NOT EXISTS api_students (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(254) NOT NULL,
+    course VARCHAR(80) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_api_students_email (email),
+    KEY idx_api_students_name (full_name)
+) ENGINE=InnoDB
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+INSERT IGNORE INTO api_students (full_name, email, course) VALUES
+    ('Aarav Patel', 'aarav.api@example.test', 'B.Tech CSE'),
+    ('Krisha Shah', 'krisha.api@example.test', 'B.Tech IT'),
+    ('Kabir Mehta', 'kabir.api@example.test', 'B.Tech EE');
+
+-- ==========================================
+-- 9. PRACTICAL 14 ADMIN AUDIT LOG
+-- ==========================================
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+    audit_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    admin_user_id INT UNSIGNED NOT NULL,
+    action VARCHAR(100) NOT NULL,
+    details VARCHAR(500) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL DEFAULT '',
+    user_agent VARCHAR(255) NOT NULL DEFAULT '',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (audit_id),
+    KEY idx_audit_logs_admin_created (admin_user_id, created_at),
+    KEY idx_audit_logs_created (created_at)
+) ENGINE=InnoDB
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
